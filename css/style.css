@@ -10,17 +10,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: #f4f4f4;
   color: #333;
-  padding: 5px 40px;
+  padding: 8px 40px;
   font-size: 14px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #ddd;
 }
 
 .top-bar-left ul {
   list-style: none;
   display: flex;
-  gap: 25px;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
@@ -28,8 +28,8 @@ body {
 .top-bar-left ul li a {
   text-decoration: none;
   color: #333;
-  font-size: 14px;
   font-weight: 400;
+  font-size: 14px;
   transition: color 0.3s ease;
 }
 
@@ -57,4 +57,95 @@ body {
 
 .top-bar-right span {
   color: #bbb;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+
+.catalog-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.catalog-button:hover {
+  background-color: #218838;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.header-center input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-right a {
+  position: relative;
+  font-size: 18px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.header-right a:hover {
+  color: #28a745;
+}
+
+.counter {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
 }
