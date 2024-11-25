@@ -71,91 +71,36 @@ header {
   background-color: #218838;
 }
 
-.catalog-button .icon {
-  font-size: 18px;
-}
-
 .header-center {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex: 1;
-  max-width: 600px;
 }
 
 .header-center input {
-  flex: 1;
+  width: 100%;
   padding: 10px 15px;
   border: 1px solid #ddd;
-  border-radius: 30px;
-  font-size: 14px;
-  background-color: #f8f9fa;
-  outline: none;
+  border-radius: 20px;
 }
 
-.header-center input::placeholder {
-  color: #aaa;
-}
-
-.search-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  color: #333;
-  transition: color 0.3s;
-}
-
-.search-button:hover {
-  color: #28a745;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.header-right a {
-  position: relative;
-  font-size: 18px;
-  color: #333;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.header-right a:hover {
-  color: #28a745;
-}
-
-.counter {
-  position: absolute;
-  top: -8px;
-  right: -10px;
-  background-color: #28a745;
-  color: #fff;
-  border-radius: 50%;
-  padding: 4px 7px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-/* Слайдер */
 .slider {
-  position: relative;
   text-align: center;
   margin: 20px 0;
-  padding: 50px 0;
-  background-color: #000;
-  color: #fff;
 }
 
 .slider-wrapper {
+  overflow: hidden;
   position: relative;
 }
 
 .slide {
   display: none;
+  text-align: center;
+  color: #fff;
+  background: #000;
+  padding: 40px 20px;
+  border-radius: 10px;
 }
 
 .slide.active {
@@ -175,9 +120,9 @@ header {
 .slider-controls button {
   background: none;
   border: none;
-  font-size: 24px;
-  color: #fff;
+  font-size: 20px;
   cursor: pointer;
+  color: #fff;
   transition: color 0.3s;
 }
 
@@ -185,35 +130,81 @@ header {
   color: #28a745;
 }
 
-/* Інформаційні блоки */
 .info-blocks {
   display: flex;
-  justify-content: space-between;
-  margin: 50px 40px;
+  justify-content: space-around;
+  padding: 40px 20px;
 }
 
 .info-block {
-  flex: 1;
-  margin: 0 10px;
+  background: #fff;
+  border-radius: 10px;
   padding: 20px;
-  background-color: #fff;
+  text-align: center;
+  width: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popular-categories {
+  margin: 50px 40px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.category-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.category-header .view-all {
+  font-size: 14px;
+  color: #28a745;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.category-header .view-all:hover {
+  color: #1e7e34;
+}
+
+.categories {
+  display: flex;
+  gap: 20px;
+}
+
+.category-card {
+  flex: 1;
+  background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.info-block img {
-  max-width: 50px;
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.category-card img {
+  max-width: 100%;
+  height: auto;
   margin-bottom: 15px;
+  border-radius: 5px;
 }
 
-.info-block h3 {
+.category-card h3 {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.info-block p {
-  font-size: 14px;
-  color: #666;
+  color: #333;
 }
