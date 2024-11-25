@@ -3,20 +3,20 @@ const prevButton = document.querySelector(".prev");
 const nextButton = document.querySelector(".next");
 let currentIndex = 0;
 
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
+function updateSlide() {
+  slides.forEach((slide, index) => {
+    slide.classList.toggle("active", index === currentIndex);
   });
 }
 
 function nextSlide() {
   currentIndex = (currentIndex + 1) % slides.length;
-  showSlide(currentIndex);
+  updateSlide();
 }
 
 function prevSlide() {
   currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  showSlide(currentIndex);
+  updateSlide();
 }
 
 nextButton.addEventListener("click", nextSlide);
