@@ -5,8 +5,14 @@
   --icon-size: 20px;
 }
 
+a:focus,
+button:focus {
+  outline: 2px dashed var(--main-color);
+  outline-offset: 2px;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--secondary-color);
@@ -22,13 +28,32 @@ header {
   padding: 10px 0;
 }
 
+.menu {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #141414;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
 .menu,
 .contacts {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .menu a,
@@ -41,13 +66,31 @@ header {
   gap: 8px;
 }
 
-.contacts .icon {
-  width: var(--icon-size);
-  height: var(--icon-size);
+.menu ul,
+.contacts ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.top-bar a:hover {
-  color: var(--main-color);
+.contacts a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #141414;
+  gap: 8px;
+}
+
+.contacts {
+  display: flex;
+  gap: 20px;
+}
+
+.contacts .icon {
+  width: 20px;
+  height: 20px;
 }
 
 .bottom-section {
@@ -129,19 +172,25 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 12px 112px;
+  background-color: #efefef;
+  font-size: 18px;
+  color: #141414;
+  width: 100%;
+  height: 0px;
 }
 
 .top-bar ul {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
 
 .top-bar a {
   text-decoration: none;
-  color: #333;
+  color: #141414;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -149,7 +198,8 @@ header {
 }
 
 .top-bar a:hover {
-  color: #28a745;
+  color: var(--main-color);
+  transition: color 0.3s ease-in-out;
 }
 
 .top-bar .icon {
