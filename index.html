@@ -8,39 +8,71 @@
   </head>
   <body>
     <header>
-      <div class="top-bar container">
-        <div class="top-bar-left">
-          <ul>
-            <li><a href="#">Про нас</a></li>
-            <li><a href="#">Доставка і оплата</a></li>
-            <li><a href="#">Бренди</a></li>
-          </ul>
-        </div>
-        <div class="top-bar-right">
-          <a href="https://instagram.com/auto.tooll" target="_blank"
-            >@auto.tooll</a
-          >
-          <span>|</span>
-          <a href="tel:+380687900830">+38 (068) 790 08 30</a>
+      <div class="top-section">
+        <div class="top-bar container">
+          <div class="top-bar-left">
+            <ul>
+              <li><a href="#">Про нас</a></li>
+              <li><a href="#">Доставка і оплата</a></li>
+              <li><a href="#">Бренди</a></li>
+            </ul>
+          </div>
+          <div class="top-bar-right">
+            <a href="https://instagram.com/auto.tooll" target="_blank">
+              <img
+                src="images/Icons/instagram.svg"
+                alt="Instagram"
+                class="icon"
+              />
+              @auto.tooll
+            </a>
+            <span>|</span>
+            <a href="tel:+380687900830">
+              <img src="images/Icons/phone.svg" alt="Телефон" class="icon" />
+              +38 (068) 790 08 30
+            </a>
+          </div>
         </div>
       </div>
-      <div class="header container">
-        <div class="header-left">
-          <a href="#" class="logo">AUTO TOOL</a>
-          <button class="catalog-button">Каталог</button>
-        </div>
-        <div class="header-center">
-          <input type="text" placeholder="Пошук товарів" />
-        </div>
-        <div class="header-right">
-          <a href="#" class="favorite">❤ <span class="counter">0</span></a>
-          <a href="#" class="cart">🛒 <span class="counter">3</span></a>
+      <div class="bottom-section">
+        <div class="header container">
+          <div class="header-left">
+            <a href="#" class="logo">AUTO TOOL</a>
+            <button class="catalog-button">
+              <img src="images/Icons/catalog.svg" alt="Каталог" class="icon" />
+              Каталог
+            </button>
+          </div>
+          <div class="header-center">
+            <div class="search-wrapper">
+              <input type="text" placeholder="Пошук товарів" />
+              <img
+                src="images/Icons/search.svg"
+                alt="Пошук"
+                class="search-icon"
+              />
+            </div>
+          </div>
+          <div class="header-right">
+            <a href="#" class="favorite">
+              <img
+                src="images/Icons/favorites.svg"
+                alt="Улюблене"
+                class="icon"
+              />
+              <span class="counter">0</span>
+            </a>
+            <a href="#" class="cart">
+              <img src="images/Icons/cart.svg" alt="Кошик" class="icon" />
+              <span class="counter">3</span>
+            </a>
+          </div>
         </div>
       </div>
     </header>
 
-    <main>
-      <section class="slider container">
+    <main class="container">
+      <section class="slider">
         <div class="slider-wrapper">
           <div class="slide active">
             <h1>Ручний інструмент та набори для СТО</h1>
@@ -62,25 +94,37 @@
         </div>
       </section>
 
-      <section class="info-blocks container">
+      <section class="info-blocks">
         <div class="info-block">
-          <img src="img/icon1.png" alt="Широкий асортимент" />
+          <img
+            src="images/Icons/tools.svg"
+            alt="Широкий асортимент"
+            class="icon-large"
+          />
           <h3>Широкий асортимент</h3>
           <p>Від базових інструментів до професійного обладнання</p>
         </div>
         <div class="info-block">
-          <img src="img/icon2.png" alt="Гарантія якості" />
+          <img
+            src="images/Icons/quality.svg"
+            alt="Гарантія якості"
+            class="icon-large"
+          />
           <h3>Гарантія якості</h3>
           <p>Продукція відповідає міжнародним стандартам якості та безпеки</p>
         </div>
         <div class="info-block">
-          <img src="img/icon3.png" alt="Підтримка" />
+          <img
+            src="images/Icons/support.svg"
+            alt="Підтримка"
+            class="icon-large"
+          />
           <h3>Підтримка</h3>
           <p>Консультації під час вибору і після покупки</p>
         </div>
       </section>
 
-      <section class="popular-categories container">
+      <section class="popular-categories">
         <div class="category-header">
           <h2>Популярні категорії</h2>
           <a href="#" class="view-all">Усі категорії</a>
