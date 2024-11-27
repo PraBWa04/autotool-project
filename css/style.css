@@ -278,25 +278,69 @@ header {
 }
 
 .slider {
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
   position: relative;
-}
-
-.slider-wrapper {
   overflow: hidden;
   border-radius: 10px;
 }
 
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
 .slide {
+  flex: 0 0 100%;
   display: none;
-  text-align: center;
-  background-color: #000;
-  color: #fff;
-  padding: 40px;
+  position: relative; /* Для позиціювання контенту */
 }
 
 .slide.active {
-  display: block;
+  display: flex; /* Показує активний слайд */
+  justify-content: center; /* Центрує зображення */
+  align-items: center; /* Центрує контент */
+}
+
+.slider-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.slider-content {
+  position: absolute;
+  bottom: 20%; /* Відступ знизу */
+  left: 10%; /* Відступ зліва */
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Прозорий фон */
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.slider-content h1 {
+  font-size: 24px;
+  margin: 0 0 10px;
+}
+
+.slider-content p {
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+.slider-button {
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.slider-button:hover {
+  background-color: #218838;
 }
 
 .slider-controls {
@@ -307,19 +351,23 @@ header {
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
-  padding: 0 15px;
 }
 
 .slider-controls button {
-  background: none;
+  background: white;
   border: none;
-  font-size: 20px;
-  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .slider-controls button:hover {
-  color: #28a745;
+  background: var(--main-color);
 }
 
 .info-blocks {
@@ -409,5 +457,20 @@ header {
 
   .category-card {
     flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .slider-image {
+    display: none;
+  }
+
+  .slider {
+    height: auto;
   }
 }
