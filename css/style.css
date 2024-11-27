@@ -278,9 +278,8 @@ header {
 }
 
 .slider {
-  display: flex;
-  align-items: center;
   position: relative;
+  display: flex;
   overflow: hidden;
   border-radius: 10px;
 }
@@ -288,18 +287,19 @@ header {
 .slider-wrapper {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  width: 100%;
 }
 
 .slide {
   flex: 0 0 100%;
-  display: none;
-  position: relative; /* Для позиціювання контенту */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .slide.active {
-  display: flex; /* Показує активний слайд */
-  justify-content: center; /* Центрує зображення */
-  align-items: center; /* Центрує контент */
+  display: flex;
 }
 
 .slider-image {
@@ -310,23 +310,23 @@ header {
 
 .slider-content {
   position: absolute;
-  bottom: 20%; /* Відступ знизу */
-  left: 10%; /* Відступ зліва */
-  color: white;
-  background: rgba(0, 0, 0, 0.5); /* Прозорий фон */
+  bottom: 20%;
+  left: 10%;
+  background: rgba(0, 0, 0, 0.7);
   padding: 20px;
-  border-radius: 10px;
-  z-index: 2;
+  border-radius: 8px;
+  color: white;
+  max-width: 40%;
 }
 
 .slider-content h1 {
-  font-size: 24px;
-  margin: 0 0 10px;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .slider-content p {
   font-size: 16px;
-  margin: 0 0 10px;
+  margin-bottom: 15px;
 }
 
 .slider-button {
@@ -336,7 +336,6 @@ header {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 .slider-button:hover {
@@ -346,15 +345,14 @@ header {
 .slider-controls {
   position: absolute;
   top: 50%;
-  left: 0;
-  right: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
 }
 
 .slider-controls button {
-  background: white;
+  background-color: rgba(255, 255, 255, 0.8);
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -363,11 +361,11 @@ header {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .slider-controls button:hover {
-  background: var(--main-color);
+  background-color: var(--main-color);
+  color: white;
 }
 
 .info-blocks {

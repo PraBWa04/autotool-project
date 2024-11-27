@@ -1,10 +1,12 @@
 const slides = document.querySelectorAll(".slide");
+const sliderWrapper = document.querySelector(".slider-wrapper");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 let currentSlide = 0;
 
-// Функція для показу слайду
 function showSlide(index) {
+  const offset = -index * 100;
+  sliderWrapper.style.transform = `translateX(${offset}%)`;
   slides.forEach((slide, i) => {
     slide.classList.remove("active");
     if (i === index) {
@@ -13,34 +15,27 @@ function showSlide(index) {
   });
 }
 
-// Додавання обробників
-if (nextBtn && prevBtn) {
-  nextBtn.addEventListener("click", () => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  });
-
-  prevBtn.addEventListener("click", () => {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-  });
-}
-
-// Автоматична зміна слайдів
-let interval = setInterval(() => {
+function nextSlide() {
   currentSlide = (currentSlide + 1) % slides.length;
   showSlide(currentSlide);
-}, 5000);
+}
 
-// Зупинка при наведенні
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
+
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+let autoSlide = setInterval(nextSlide, 5000);
+
 document.querySelector(".slider").addEventListener("mouseenter", () => {
-  clearInterval(interval);
+  clearInterval(autoSlide);
 });
 
-// Відновлення інтервалу після наведення
 document.querySelector(".slider").addEventListener("mouseleave", () => {
-  interval = setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }, 5000);
+  autoSlide = setInterval(nextSlide, 5000);
 });
+
+showSlide(currentSlide);
