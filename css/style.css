@@ -5,12 +5,6 @@
   --transition-time: 0.5s;
 }
 
-a:focus,
-button:focus {
-  outline: 2px dashed var(--main-color);
-  outline-offset: 2px;
-}
-
 body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
@@ -106,8 +100,10 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ff0000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 main {
@@ -347,17 +343,22 @@ main {
 
 .slider-wrapper {
   display: flex;
-  transition: transform var(--transition-time) ease-in-out;
+  width: 100%;
+  position: relative;
 }
 
 .slide {
   flex: 0 0 100%;
   opacity: 0;
-  transition: opacity var(--transition-time) ease;
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .slide.active {
   opacity: 1;
+  position: relative;
 }
 
 .slider-image {

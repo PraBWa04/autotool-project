@@ -1,11 +1,16 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll(".slide");
   const nextBtn = document.querySelector(".next");
   const prevBtn = document.querySelector(".prev");
+  const bottomSection = document.querySelector(".bottom-section");
+  const topSection = document.querySelector(".top-section");
   let currentSlide = 0;
+  let slideInterval;
 
   const showSlide = (index) => {
-    slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
   };
 
   const nextSlide = () => {
@@ -18,8 +23,28 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentSlide);
   };
 
-  nextBtn.addEventListener("click", nextSlide);
-  prevBtn.addEventListener("click", prevSlide);
+  const resetInterval = () => {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 5000);
+  };
 
-  setInterval(nextSlide, 50000);
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    resetInterval();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    resetInterval();
+  });
+
+  slideInterval = setInterval(nextSlide, 5000);
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY >= topSection.offsetHeight) {
+      bottomSection.classList.add("fixed");
+    } else {
+      bottomSection.classList.remove("fixed");
+    }
+  });
 });
