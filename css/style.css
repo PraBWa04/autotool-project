@@ -2,6 +2,7 @@
   --main-color: #08a744;
   --secondary-color: #f8f9fa;
   --text-color: #333;
+  --transition-time: 0.5s;
 }
 
 a:focus,
@@ -19,7 +20,7 @@ body {
 }
 
 header {
-  position: relative; /* Відносне позиціонування загального хедера */
+  position: relative;
   z-index: 200;
 }
 
@@ -92,12 +93,12 @@ header {
 }
 
 .bottom-section {
-  position: relative; /* Початкове положення */
+  position: relative;
   z-index: 200;
   background-color: #fff;
   padding: 20px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease; /* Плавність анімації */
+  transition: all 0.3s ease;
 }
 
 .bottom-section.fixed {
@@ -105,11 +106,12 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  background-color: #ff0000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 main {
-  margin-top: 80px; /* Висота bottom-section */
+  margin-top: 80px;
 }
 
 .header {
@@ -345,13 +347,13 @@ main {
 
 .slider-wrapper {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  transition: transform var(--transition-time) ease-in-out;
 }
 
 .slide {
   flex: 0 0 100%;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity var(--transition-time) ease;
 }
 
 .slide.active {
@@ -410,19 +412,22 @@ main {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-time) ease;
 }
+
 .slider-controls .prev {
-  left: -10px;
+  left: 10px;
 }
+
 .slider-controls .next {
-  right: -10px;
+  right: 10px;
 }
 
 .slider-controls button:hover {
-  background-color: var(--main-color);
-  color: white;
+  color: #fff;
 }
 
 .info-blocks {
