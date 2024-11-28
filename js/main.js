@@ -4,28 +4,22 @@ const prevBtn = document.querySelector(".prev");
 let currentSlide = 0;
 
 function showSlide(index) {
-  currentSlide = (index + slides.length) % slides.length;
   slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === currentSlide);
+    slide.classList.toggle("active", i === index);
   });
 }
 
 nextBtn.addEventListener("click", () => {
-  showSlide(currentSlide + 1);
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
 });
 
 prevBtn.addEventListener("click", () => {
-  showSlide(currentSlide - 1);
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
 });
 
-let autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
-
-document.querySelector(".slider").addEventListener("mouseenter", () => {
-  clearInterval(autoSlide);
-});
-
-document.querySelector(".slider").addEventListener("mouseleave", () => {
-  autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
-});
-
-showSlide(currentSlide);
+setInterval(() => {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}, 5000);
