@@ -1,8 +1,7 @@
 :root {
-  --main-color: #28a745;
+  --main-color: #08a744;
   --secondary-color: #f8f9fa;
   --text-color: #333;
-  --icon-size: 20px;
 }
 
 a:focus,
@@ -20,12 +19,16 @@ body {
 }
 
 header {
-  border-bottom: 1px solid #ddd;
+  position: relative; /* Відносне позиціонування загального хедера */
+  z-index: 200;
 }
 
 .top-section {
+  position: relative;
+  z-index: 200;
   background-color: #f2f2f2;
   padding: 10px 0;
+  border-bottom: 1px solid #ddd;
 }
 
 .menu {
@@ -49,21 +52,16 @@ header {
 .menu,
 .contacts {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   list-style: none;
-  padding: 0;
   margin: 0;
-  flex-wrap: wrap;
+  padding: 0;
 }
 
 .menu a,
 .contacts a {
   text-decoration: none;
   color: var(--text-color);
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .menu ul,
@@ -94,15 +92,33 @@ header {
 }
 
 .bottom-section {
+  position: relative; /* Початкове положення */
+  z-index: 200;
   background-color: #fff;
   padding: 20px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease; /* Плавність анімації */
+}
+
+.bottom-section.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+main {
+  margin-top: 80px; /* Висота bottom-section */
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 .logo {
@@ -115,12 +131,12 @@ header {
 .catalog-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+  gap: 20px;
+  padding: 15px 58px;
   background-color: var(--main-color);
   color: #fff;
   border: none;
-  border-radius: 20px;
+  border-radius: 40px;
   font-size: 16px;
   cursor: pointer;
 }
@@ -138,8 +154,8 @@ header {
   width: 100%;
   padding: 10px 15px 10px 40px;
   border: 1px solid #ddd;
-  border-radius: 20px;
-  background-color: #f2f2f2;
+  border-radius: 40px;
+  background-color: #fafafa;
 }
 
 .search-wrapper .search-icon {
@@ -174,12 +190,15 @@ header {
 }
 
 .actions a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
   position: relative;
-  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 0.3px solid lightgray;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 }
 
 .actions a img {
@@ -313,6 +332,10 @@ header {
   border-radius: 50%;
 }
 
+.slider-container {
+  margin-top: 20px;
+}
+
 .slider {
   position: relative;
   display: flex;
@@ -384,15 +407,17 @@ header {
 }
 
 .slider-controls button {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+}
+.slider-controls .prev {
+  left: -10px;
+}
+.slider-controls .next {
+  right: -10px;
 }
 
 .slider-controls button:hover {
