@@ -13,6 +13,18 @@ body {
   color: var(--text-color);
 }
 
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
 header {
   position: relative;
   z-index: 200;
@@ -55,8 +67,10 @@ header {
 
 .menu a,
 .contacts a {
-  text-decoration: none;
-  color: var(--text-color);
+  font-size: 16px; /* Розмір тексту у меню та контактах */
+  font-weight: normal; /* Текст не жирний */
+  color: #333; /* Контрастний колір */
+  text-decoration: none; /* Забрано підкреслення */
 }
 
 .menu ul,
@@ -73,7 +87,7 @@ header {
   align-items: center;
   text-decoration: none;
   color: #141414;
-  gap: 8px;
+  gap: 10px;
 }
 
 .contacts {
@@ -117,6 +131,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+  gap: 15px;
 }
 
 .logo {
@@ -135,11 +150,27 @@ main {
   color: #fff;
   border: none;
   border-radius: 40px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: inherit;
   cursor: pointer;
+  margin-right: 20px;
+  margin-left: -110px;
 }
 
 .catalog-button:hover {
+  background-color: #218838;
+}
+
+.button {
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
   background-color: #218838;
 }
 
@@ -154,6 +185,9 @@ main {
   border: 1px solid #ddd;
   border-radius: 40px;
   background-color: #fafafa;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  height: 35px;
 }
 
 .search-wrapper .search-icon {
@@ -178,13 +212,15 @@ main {
 
 .actions .counter {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: var(--main-color);
-  color: #fff;
-  padding: 2px 6px;
-  font-size: 12px;
-  border-radius: 50%;
+  top: -12px; /* Трохи вище */
+  right: -12px; /* Відсунемо праворуч */
+  background-color: var(--main-color); /* Зелений фон */
+  color: #fff; /* Білий текст */
+  padding: 10px 14px; /* Збільшено внутрішні відступи */
+  font-size: 18px; /* Збільшено розмір тексту */
+  font-weight: bold; /* Жирний текст */
+  border-radius: 50%; /* Округлена форма */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Тінь для ефекту */
 }
 
 .actions a {
@@ -211,7 +247,7 @@ main {
   background-color: var(--main-color);
   color: #fff;
   padding: 2px 6px;
-  font-size: 12px;
+  font-size: 15px;
   border-radius: 50%;
 }
 
@@ -231,6 +267,8 @@ main {
   color: #141414;
   width: 100%;
   height: 0px;
+  font-weight: normal; /* Зроблено текст нормальної ваги */
+  letter-spacing: 0.5px; /* Легка розрядка */
 }
 
 .top-bar ul {
@@ -321,17 +359,28 @@ main {
 
 .counter {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: var(--main-color);
-  color: #fff;
-  padding: 2px 6px;
-  font-size: 12px;
-  border-radius: 50%;
+  top: -14px; /* Ще трохи вище */
+  right: -14px; /* Далі від краю */
+  background-color: var(--main-color); /* Колір залишається */
+  color: #fff; /* Білий текст */
+  padding: 8px 12px; /* Більше внутрішніх відступів */
+  font-size: 18px; /* Збільшено розмір тексту */
+  font-weight: bold; /* Жирний текст */
+  border-radius: 50%; /* Залишається округлим */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Тінь для виразності */
+}
+
+.slider-container-wrapper {
+  background-color: #ffffff; /* Білий фон */
+  padding: 20px 0; /* Відступи зверху і знизу */
+  width: 100vw; /* Зробити білий фон на всю ширину екрану */
+  margin-left: calc(-50vw + 50%); /* Вирівнювання фону на всю ширину */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Легка тінь */
 }
 
 .slider-container {
-  margin-top: 20px;
+  max-width: 1200px; /* Центрування контенту */
+  margin: 0 auto; /* Центрування слайдера */
 }
 
 .slider {
@@ -378,26 +427,31 @@ main {
 }
 
 .slider-content h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #fff;
 }
 
 .slider-content p {
   font-size: 16px;
-  margin-bottom: 15px;
+  line-height: 1.5;
+  color: #ddd;
 }
 
 .slider-button {
   background-color: var(--main-color);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 20px 47px; /* Збільшено розмір відступів */
+  border-radius: 40px; /* Більше округлення для пропорцій */
+  font-size: 18px; /* Збільшено розмір тексту */
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Додано плавну анімацію */
 }
 
 .slider-button:hover {
   background-color: #218838;
+  transform: scale(1.05); /* Легке збільшення при наведенні */
 }
 
 .slider-controls {
@@ -467,7 +521,12 @@ main {
   background: white;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 .category-card img {
