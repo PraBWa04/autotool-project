@@ -67,10 +67,10 @@ header {
 
 .menu a,
 .contacts a {
-  font-size: 16px; /* Розмір тексту у меню та контактах */
-  font-weight: normal; /* Текст не жирний */
-  color: #333; /* Контрастний колір */
-  text-decoration: none; /* Забрано підкреслення */
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+  text-decoration: none;
 }
 
 .menu ul,
@@ -212,15 +212,15 @@ main {
 
 .actions .counter {
   position: absolute;
-  top: -12px; /* Трохи вище */
-  right: -12px; /* Відсунемо праворуч */
-  background-color: var(--main-color); /* Зелений фон */
-  color: #fff; /* Білий текст */
-  padding: 10px 14px; /* Збільшено внутрішні відступи */
-  font-size: 18px; /* Збільшено розмір тексту */
-  font-weight: bold; /* Жирний текст */
-  border-radius: 50%; /* Округлена форма */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Тінь для ефекту */
+  top: -12px;
+  right: -12px;
+  background-color: var(--main-color);
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .actions a {
@@ -267,8 +267,8 @@ main {
   color: #141414;
   width: 100%;
   height: 0px;
-  font-weight: normal; /* Зроблено текст нормальної ваги */
-  letter-spacing: 0.5px; /* Легка розрядка */
+  font-weight: normal;
+  letter-spacing: 0.5px;
 }
 
 .top-bar ul {
@@ -359,28 +359,28 @@ main {
 
 .counter {
   position: absolute;
-  top: -14px; /* Ще трохи вище */
-  right: -14px; /* Далі від краю */
-  background-color: var(--main-color); /* Колір залишається */
-  color: #fff; /* Білий текст */
-  padding: 8px 12px; /* Більше внутрішніх відступів */
-  font-size: 18px; /* Збільшено розмір тексту */
-  font-weight: bold; /* Жирний текст */
-  border-radius: 50%; /* Залишається округлим */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Тінь для виразності */
+  top: -14px;
+  right: -14px;
+  background-color: var(--main-color);
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .slider-container-wrapper {
-  background-color: #ffffff; /* Білий фон */
-  padding: 20px 0; /* Відступи зверху і знизу */
-  width: 100vw; /* Зробити білий фон на всю ширину екрану */
-  margin-left: calc(-50vw + 50%); /* Вирівнювання фону на всю ширину */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Легка тінь */
+  background-color: #ffffff;
+  padding: 20px 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .slider-container {
-  max-width: 1200px; /* Центрування контенту */
-  margin: 0 auto; /* Центрування слайдера */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .slider {
@@ -442,16 +442,16 @@ main {
   background-color: var(--main-color);
   color: white;
   border: none;
-  padding: 20px 47px; /* Збільшено розмір відступів */
-  border-radius: 40px; /* Більше округлення для пропорцій */
-  font-size: 18px; /* Збільшено розмір тексту */
+  padding: 20px 47px;
+  border-radius: 40px;
+  font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; /* Додано плавну анімацію */
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .slider-button:hover {
   background-color: #218838;
-  transform: scale(1.05); /* Легке збільшення при наведенні */
+  transform: scale(1.05);
 }
 
 .slider-controls {
