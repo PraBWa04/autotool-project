@@ -487,10 +487,10 @@ main {
 
 .info-blocks {
   display: flex;
-  gap: 30px; /* Відстань між блоками */
-  margin-top: 60px; /* Відступ зверху */
-  margin-bottom: 60px; /* Відступ знизу */
-  justify-content: space-between; /* Рівномірний розподіл блоків */
+  gap: 30px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  justify-content: space-between;
 }
 
 .info-blocks .info-block {
