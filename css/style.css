@@ -372,7 +372,7 @@ main {
 
 .slider-container-wrapper {
   background-color: #ffffff;
-  padding: 20px 0;
+  padding: 40px 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -487,22 +487,24 @@ main {
 
 .info-blocks {
   display: flex;
-  gap: 40px;
-  margin-top: 40px;
+  gap: 30px; /* Відстань між блоками */
+  margin-top: 60px; /* Відступ зверху */
+  margin-bottom: 60px; /* Відступ знизу */
+  justify-content: space-between; /* Рівномірний розподіл блоків */
 }
 
 .info-blocks .info-block {
   flex: 1;
-  text-align: left; /* Вирівнювання тексту зліва */
-  padding: 40px; /* Більше відступів */
+  text-align: left;
+  padding: 40px;
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .info-blocks .info-block h3 {
-  color: #08a744; /* Зелений колір заголовка */
-  font-size: 24px; /* Змінюємо розмір */
+  color: #08a744;
+  font-size: 24px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -510,7 +512,7 @@ main {
 
 .info-blocks .info-block img {
   display: inline-block;
-  margin-right: 15px; /* Відступ для іконки */
+  margin-right: 15px;
 }
 
 .info-blocks .info-block p {
@@ -519,16 +521,43 @@ main {
 }
 
 .info-block {
-  flex: 1;
+  max-width: 400px;
+  flex: 1 1 30%;
+  display: flex;
+  text-align: left;
+  align-items: center;
   background-color: #fff;
-  padding: 20px;
+  padding: 40px;
   border-radius: 12px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .info-block:hover {
   transform: translateY(-5px);
+}
+
+.info-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.info-text {
+  margin-left: 22px;
+}
+
+.info-text h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #08a744;
+  margin: 0 0 10px 0;
+}
+
+.info-text p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
 }
 
 .info-icon-text {
@@ -561,7 +590,8 @@ main {
 }
 
 .popular-categories {
-  padding: 40px 0;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 .popular-categories h2 {
@@ -594,10 +624,10 @@ main {
 }
 
 .category-card h3 {
-  margin-left: 27px;
+  margin-left: 22px;
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 20px;
+  left: 20px;
   font-size: 18px;
   color: white;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
@@ -607,29 +637,57 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .category-header h2 {
   font-size: 32px;
   font-weight: bold;
   color: #333;
+  margin: 0;
 }
 
 .category-header .view-all {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 16px;
   color: #08a744;
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.category-header .view-all:hover {
+  color: #065d34;
+}
+
+.arrow-icon {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  margin-left: -2px;
+  transition: transform 0.3s ease;
+}
+
+.view-all .arrow-icon {
+  background-color: var(--main-color);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+}
+
+.view-all:hover .arrow-icon {
+  transform: scale(1.1);
 }
 
 .view-all {
-  text-decoration: none;
-  color: #28a745;
-  font-weight: bold;
-  font-size: 16px;
-  justify-content: end;
-  display: flex;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin-top: 10px;
 }
 
@@ -683,5 +741,17 @@ main {
 
   .slider {
     height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-block {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .popular-categories {
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
 }
