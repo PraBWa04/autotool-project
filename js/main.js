@@ -50,16 +50,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".tab-button");
+  const tabButtons = document.querySelectorAll(".tab-button");
   const productSections = document.querySelectorAll(".products");
 
-  buttons.forEach((button) => {
+  tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      buttons.forEach((btn) => btn.classList.remove("active"));
+      tabButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
 
+      const targetId = button.dataset.target;
       productSections.forEach((section) => {
-        if (section.id === button.dataset.target) {
+        if (section.id === targetId) {
           section.classList.remove("hidden");
         } else {
           section.classList.add("hidden");
