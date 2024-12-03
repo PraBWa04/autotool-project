@@ -117,7 +117,6 @@ header {
   z-index: 200;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
 }
 
 main {
@@ -778,19 +777,16 @@ main {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: none;
-  border-radius: 12px;
   background-color: #08a744;
-  color: white;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .add-to-cart:hover {
@@ -800,6 +796,11 @@ main {
 
 .add-to-cart:active {
   transform: scale(0.95);
+}
+
+.cart-icon {
+  width: 24px;
+  height: 24px;
 }
 
 @media (max-width: 768px) {
@@ -879,7 +880,41 @@ main {
   }
 }
 
-/* Адаптація для мобільних пристроїв */
+.add-to-favorites {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.add-to-favorites img {
+  width: 24px;
+  height: 24px;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.add-to-favorites.active img {
+  filter: invert(47%) sepia(82%) saturate(562%) hue-rotate(100deg)
+    brightness(90%) contrast(90%);
+}
+
+.add-to-favorites.active img {
+  content: url("images/Icons/favorites-active.svg");
+}
+
+.add-to-favorites:hover {
+  transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
   .products {
     grid-template-columns: repeat(2, 1fr);
