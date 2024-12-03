@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isCurrentlyFavorite) {
         path.setAttribute("fill", "white");
         path.setAttribute("stroke", "black");
-        favoriteCount = Math.max(0, favoriteCount - 1); // Prevent going below zero
+        favoriteCount = Math.max(0, favoriteCount - 1);
       } else {
         path.setAttribute("fill", "#08a744");
         path.setAttribute("stroke", "#08a744");
@@ -130,4 +130,54 @@ document.addEventListener("DOMContentLoaded", () => {
       cartCounter.textContent = cartCount > 0 ? cartCount : "0";
     });
   });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const reviewsWrapper = document.querySelector(".reviews-wrapper");
+  const reviews = document.querySelectorAll(".review");
+  const prevArrow = document.querySelector(".carousel-arrow.prev");
+  const nextArrow = document.querySelector(".carousel-arrow.next");
+
+  const reviewWidth = reviews[0].offsetWidth + 20;
+  let currentIndex = 0;
+
+  const updateCarousel = () => {
+    reviewsWrapper.style.transform = `translateX(-${
+      currentIndex * reviewWidth
+    }px)`;
+  };
+
+  prevArrow.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = reviews.length - 1;
+    }
+    updateCarousel();
+  });
+
+  nextArrow.addEventListener("click", () => {
+    if (currentIndex < reviews.length - 1) {
+      currentIndex++;
+    } else {
+      currentIndex = 0;
+    }
+    updateCarousel();
+  });
+
+  // Динамічне оновлення ширини відгуків при зміні розміру вікна
+  window.addEventListener("resize", () => {
+    const updatedReviewWidth = reviews[0].offsetWidth + 20;
+    reviewsWrapper.style.transform = `translateX(-${
+      currentIndex * updatedReviewWidth
+    }px)`;
+  });
+});
+
+window.addEventListener("resize", () => {
+  const isMobile = window.innerWidth <= 768;
+  const visibleReviews = isMobile ? 1 : 3;
+  const updatedReviewWidth = reviewsWrapper.offsetWidth / visibleReviews + 20;
+  reviewWidth = updatedReviewWidth;
+  updateCarousel();
 });
