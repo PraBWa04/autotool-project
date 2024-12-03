@@ -69,3 +69,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const productCards = document.querySelectorAll(".product-card");
+
+  productCards.forEach((card) => {
+    const cartButton = document.createElement("button");
+    cartButton.classList.add("add-to-cart");
+    cartButton.innerHTML = `<img src="images/Icons/cart-white.svg" alt="Кошик">`;
+
+    card.appendChild(cartButton);
+
+    cartButton.addEventListener("click", () => {
+      alert("Товар додано до кошика!");
+    });
+  });
+});
