@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSlide = 0;
   let slideInterval;
 
-  // Показ слайдів
+  // Slide functionality
   const showSlide = (index) => {
     slides.forEach((slide, i) => {
       slide.classList.toggle("active", i === index);
@@ -41,13 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   slideInterval = setInterval(nextSlide, 5000);
 
-  // Фіксація нижньої панелі
+  // Sticky bottom section
   window.addEventListener("scroll", () => {
     const topHeight = topSection ? topSection.offsetHeight : 0;
     bottomSection.classList.toggle("fixed", window.scrollY >= topHeight);
   });
 
-  // Табуляція для товарів
+  // Tabs for products
   const tabButtons = document.querySelectorAll(".tab-button");
   const productSections = document.querySelectorAll(".products");
 
@@ -63,11 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Додавання до улюблених та кошика
+  // Counters for cart and favorites
+  const cartCounter = document.querySelector(".cart .counter");
+  const favoriteCounter = document.querySelector(".favorite .counter");
+  let cartCount = 0;
+  let favoriteCount = 0;
+
+  // Buttons for product cards
   const productCards = document.querySelectorAll(".product-card");
 
   productCards.forEach((card) => {
-    // Додавання кнопки "Улюблене"
+    // Favorite button
     const favoriteButton = document.createElement("button");
     favoriteButton.classList.add("add-to-favorites");
     favoriteButton.innerHTML = `
@@ -90,25 +96,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     favoriteButton.addEventListener("click", () => {
       const path = favoriteButton.querySelector("path");
-      const isFavorite = path.getAttribute("fill") === "white";
-      path.setAttribute("fill", isFavorite ? "#08a744" : "white");
-      path.setAttribute("stroke", isFavorite ? "#08a744" : "black");
+      const isCurrentlyFavorite = path.getAttribute("fill") === "#08a744";
+
+      // Toggle favorite status
+      if (isCurrentlyFavorite) {
+        path.setAttribute("fill", "white");
+        path.setAttribute("stroke", "black");
+        favoriteCount = Math.max(0, favoriteCount - 1); // Prevent going below zero
+      } else {
+        path.setAttribute("fill", "#08a744");
+        path.setAttribute("stroke", "#08a744");
+        favoriteCount++;
+      }
+
+      // Update counter
+      favoriteCounter.textContent = favoriteCount > 0 ? favoriteCount : "0";
     });
 
-    // Додавання кнопки "Кошик"
+    // Cart button
     const cartButton = document.createElement("button");
     cartButton.classList.add("add-to-cart");
     cartButton.innerHTML = `
       <img
         src="images/Icons/cart-white.svg"
-        alt="Кошик"
+        alt="Cart"
         class="cart-icon"
       />
     `;
     card.appendChild(cartButton);
 
     cartButton.addEventListener("click", () => {
-      alert("Товар додано до кошика!");
+      cartCount++;
+      cartCounter.textContent = cartCount > 0 ? cartCount : "0";
     });
   });
 });
