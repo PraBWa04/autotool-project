@@ -181,3 +181,76 @@ window.addEventListener("resize", () => {
   reviewWidth = updatedReviewWidth;
   updateCarousel();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const reviewForm = document.getElementById("review-form"); // Додано визначення змінної reviewForm
+  const reviewsWrapper = document.querySelector(".reviews-wrapper");
+  const leaveReviewBtn = document.getElementById("leave-review-btn");
+  const modal = document.getElementById("review-modal");
+  const closeModal = document.getElementById("close-modal");
+
+  if (!reviewsWrapper) {
+    console.error("reviewsWrapper не знайдено.");
+    return;
+  }
+
+  if (!modal || !leaveReviewBtn || !closeModal) {
+    console.error("Одного з елементів модального вікна не знайдено.");
+    return;
+  }
+
+  // Логіка модального вікна
+  leaveReviewBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    console.log("Модальне вікно відкрито.");
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    console.log("Модальне вікно закрито.");
+  });
+
+  // Обробка форми
+  reviewForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const comment = document.getElementById("comment").value.trim();
+
+    if (!name) {
+      alert("Введіть ваше ім'я.");
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert("Введіть правильний email.");
+      return;
+    }
+    if (!comment) {
+      alert("Напишіть ваш відгук.");
+      return;
+    }
+
+    const today = new Date();
+    const date = `${today.getDate().toString().padStart(2, "0")}.${(
+      today.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}.${today.getFullYear()}`;
+
+    const newReview = document.createElement("div");
+    newReview.classList.add("review");
+    newReview.innerHTML = `
+        <div class="review-header">
+          <h3>${name}</h3>
+          <span class="date">${date}</span>
+        </div>
+        <p>${comment}</p>
+      `;
+
+    reviewsWrapper.appendChild(newReview);
+    reviewForm.reset();
+    modal.classList.add("hidden");
+    console.log("Відгук додано.");
+  });
+});

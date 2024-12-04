@@ -47,7 +47,7 @@
             Каталог
           </button>
           <div class="search-wrapper">
-            <input type="text" placeholder="Пошук товарів" required />
+            <input type="text" placeholder="Пошук товарів" />
             <img
               src="images/Icons/search.svg"
               alt="Пошук"
@@ -374,7 +374,34 @@
             </div>
           </div>
         </div>
-        <button class="leave-review">Залишити відгук</button>
+        <!-- Кнопка "Залишити відгук" -->
+        <button id="leave-review-btn" class="leave-review">
+          Залишити відгук
+        </button>
+
+        <!-- Модальне вікно -->
+        <div id="review-modal" class="modal hidden">
+          <div class="modal-content">
+            <h2>Залишити відгук</h2>
+            <form id="review-form">
+              <label for="name">Ваше ім'я</label>
+              <input type="text" id="name" placeholder="Введіть ваше ім'я" />
+
+              <label for="email">Електронна пошта</label>
+              <input type="email" id="email" placeholder="example@gmail.com" />
+
+              <label for="comment">Ваш відгук</label>
+              <textarea
+                id="comment"
+                placeholder="Напишіть ваш відгук"
+                rows="4"
+              ></textarea>
+
+              <button type="submit" class="submit-review">Відправити</button>
+            </form>
+            <button id="close-modal" class="close-modal">Закрити</button>
+          </div>
+        </div>
       </section>
     </main>
     <script src="js/main.js"></script>
