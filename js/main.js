@@ -165,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCarousel();
   });
 
-  // Динамічне оновлення ширини відгуків при зміні розміру вікна
   window.addEventListener("resize", () => {
     const updatedReviewWidth = reviews[0].offsetWidth + 20;
     reviewsWrapper.style.transform = `translateX(-${
@@ -183,7 +182,7 @@ window.addEventListener("resize", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const reviewForm = document.getElementById("review-form"); // Додано визначення змінної reviewForm
+  const reviewForm = document.getElementById("review-form");
   const reviewsWrapper = document.querySelector(".reviews-wrapper");
   const leaveReviewBtn = document.getElementById("leave-review-btn");
   const modal = document.getElementById("review-modal");
@@ -252,5 +251,26 @@ document.addEventListener("DOMContentLoaded", () => {
     reviewForm.reset();
     modal.classList.add("hidden");
     console.log("Відгук додано.");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const faqItems = document.querySelectorAll(".faq-item");
+
+  faqItems.forEach((item) => {
+    const question = item.querySelector(".faq-question");
+
+    question.addEventListener("click", () => {
+      item.classList.toggle("active");
+
+      const answer = item.querySelector(".faq-answer");
+      if (item.classList.contains("active")) {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        answer.style.opacity = "1";
+      } else {
+        answer.style.maxHeight = "0";
+        answer.style.opacity = "0";
+      }
+    });
   });
 });
