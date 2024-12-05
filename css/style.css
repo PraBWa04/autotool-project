@@ -1110,6 +1110,70 @@ main {
   transform: rotate(45deg);
 }
 
+.popular-brands {
+  margin: 60px 0;
+}
+
+.brands-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.brands-header h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #141414;
+}
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 25px;
+}
+
+.brand-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand-card img {
+  max-width: 120px;
+  margin: 5px;
+}
+
+.brand-card p {
+  font-size: 16px;
+  color: #838383;
+  margin: 0;
+}
+
+.brand-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.popular-brands .brands-header .view-all {
+  color: #08a744;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popular-brands .brands-header .view-all:hover {
+  color: #065d34;
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .top-bar,
   .header {
