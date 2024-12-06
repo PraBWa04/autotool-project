@@ -1394,124 +1394,6 @@ main {
   filter: none;
 }
 
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .payment-icons img {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 1200px) {
-  .instagram-card {
-    flex: 1 1 calc(33.33% - 20px);
-  }
-}
-
-@media (max-width: 768px) {
-  .instagram-grid {
-    flex-direction: column;
-  }
-
-  .instagram-card {
-    flex: 1 1 100%;
-  }
-
-  .instagram-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .instagram-button {
-    margin-top: 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  .top-bar,
-  .header {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .info-blocks {
-    flex-wrap: wrap;
-  }
-
-  .info-block {
-    flex: 1 1 100%;
-  }
-
-  .categories {
-    flex-wrap: wrap;
-  }
-
-  .category-card {
-    flex: 1 1 calc(50% - 20px);
-  }
-}
-
-@media (max-width: 480px) {
-  .categories {
-    flex-wrap: wrap;
-  }
-
-  .category-card {
-    flex: 1 1 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .slider-content {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .slider-image {
-    display: none;
-  }
-
-  .slider {
-    height: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .info-block {
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .popular-categories {
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .products {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-  }
-
-  .tab-button {
-    font-size: 14px;
-    padding: 8px 20px;
-  }
-
-  .product-card {
-    padding: 10px;
-  }
-}
-
 .add-to-favorites {
   position: absolute;
   top: 10px;
@@ -1547,48 +1429,162 @@ main {
   transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
-  .products {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  h2 {
-    font-size: 28px;
-  }
-
-  .tab-button {
-    font-size: 14px;
-    padding: 8px 15px;
-  }
-
-  .product-card h3 {
-    font-size: 16px;
-  }
-
-  .product-card p {
-    font-size: 14px;
-  }
+/* Загальні стилі для всіх пристроїв */
+body {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
 }
 
+/* Телефони (до 480px) */
 @media (max-width: 480px) {
-  .products {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  body {
+    font-size: 14px;
   }
 
-  .product-card img {
-    max-width: 80%;
+  header,
+  footer {
+    padding: 10px;
+  }
+
+  .menu,
+  .contacts {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .logo,
+  .search-wrapper,
+  .catalog-button,
+  .actions {
+    width: 100%;
+    text-align: center;
+  }
+
+  .info-blocks,
+  .categories,
+  .reviews-carousel {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product-card,
+  .category-card,
+  .review {
+    width: 100%;
     margin: 0 auto;
   }
 
-  h2 {
-    font-size: 24px;
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer-column ul {
+    padding: 0;
+    text-align: center;
+  }
+
+  .instagram-card {
+    flex: 1 1 100%;
+    margin: 0;
   }
 
   .tab-button {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
+/* Планшети (480px до 768px) */
+@media (max-width: 768px) {
+  .header,
+  .top-bar {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .menu {
+    justify-content: center;
+  }
+
+  .slider-content {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 80%;
+  }
+
+  .categories {
+    flex-wrap: wrap;
+  }
+
+  .category-card,
+  .product-card {
+    flex: 1 1 calc(50% - 20px);
+    margin: 10px;
+  }
+
+  .info-blocks {
+    flex-wrap: wrap;
+  }
+
+  .info-block {
+    flex: 1 1 calc(50% - 20px);
+    margin-bottom: 20px;
+  }
+
+  .instagram-card {
+    flex: 1 1 calc(50% - 20px);
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+
+  .reviews-wrapper {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .review {
+    flex: 0 0 80%;
+    margin-right: 10px;
+  }
+
+  .tab-button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
+/* Ноутбуки та маленькі екрани (768px до 1024px) */
+@media (max-width: 1024px) {
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .tab-button {
+    font-size: 16px;
+    padding: 15px 20px;
   }
 
   .product-card h3 {
@@ -1598,10 +1594,63 @@ main {
   .product-card p {
     font-size: 12px;
   }
+
+  .instagram-card {
+    flex: 1 1 calc(33% - 20px);
+  }
+
+  .footer-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .footer-column ul li {
+    text-align: center;
+  }
+
+  .info-block {
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+  }
 }
 
+/* Ноутбуки та середні екрани (1024px до 1280px) */
+@media (max-width: 1280px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .products {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .info-blocks {
+    gap: 30px;
+  }
+
+  .product-card,
+  .category-card {
+    flex: 1 1 calc(25% - 10px);
+  }
+
+  .slider-content {
+    max-width: 60%;
+  }
+}
+
+/* Адаптація бургер-меню */
 @media (max-width: 768px) {
-  .review {
-    flex: 0 0 100%;
+  .burger-menu {
+    display: flex;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+    flex-direction: column;
   }
 }
