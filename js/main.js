@@ -274,3 +274,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const includeHTML = async (selector, url) => {
+    const container = document.querySelector(selector);
+    if (container) {
+      const response = await fetch(url);
+      if (response.ok) {
+        const content = await response.text();
+        container.innerHTML = content;
+      } else {
+        console.error(`Помилка завантаження ${url}: ${response.statusText}`);
+      }
+    }
+  };
+
+  includeHTML("header", "partials/header.html");
+  includeHTML("footer", "partials/footer.html");
+});
+
+document.querySelectorAll(".menu a").forEach((link) => {
+  if (link.href === window.location.href) {
+    link.classList.add("active");
+  }
+});
