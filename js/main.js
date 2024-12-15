@@ -298,3 +298,26 @@ document.querySelectorAll(".menu a").forEach((link) => {
     link.classList.add("active");
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const includeHTML = async (selector, url) => {
+    const container = document.querySelector(selector);
+    if (container) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          const content = await response.text();
+          container.innerHTML = content;
+        } else {
+          console.error(`Помилка завантаження ${url}: ${response.status}`);
+        }
+      } catch (error) {
+        console.error(`Помилка: ${error.message}`);
+      }
+    }
+  };
+
+  // Динамічно підключаємо хедер і футер
+  includeHTML("header", "partials/header.html");
+  includeHTML("footer", "partials/footer.html");
+});
