@@ -679,11 +679,27 @@ main h1 {
 }
 
 .arrow-icon {
-  width: 12px;
-  height: 12px;
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  margin-left: 5px;
   position: relative;
-  margin-left: -2px;
-  transition: transform 0.3s ease;
+}
+
+.arrow-icon::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .view-all .arrow-icon {
@@ -1472,6 +1488,158 @@ body {
   line-height: 1.5;
   margin: 0;
   padding: 0;
+}
+
+.catalog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.catalog-breadcrumbs {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.catalog-breadcrumbs a {
+  color: #666;
+  text-decoration: none;
+}
+
+.catalog-breadcrumbs a:hover {
+  text-decoration: underline;
+  color: #08a744;
+}
+
+.catalog-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.catalog-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.catalog-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.catalog-card img {
+  display: block; /* Забезпечує блоковий контекст для зображення */
+  margin: 0 auto; /* Центрує зображення горизонтально */
+  max-width: 100%; /* Забезпечує адаптивність зображення */
+  height: auto; /* Зберігає пропорції зображення */
+}
+
+.catalog-card h2 {
+  text-align: left;
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.catalog-card ul {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #666;
+}
+
+.catalog-card .all-categories {
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  color: #08a744;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.catalog-card .arrow-icon {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  margin-left: 5px;
+  position: relative;
+}
+
+.catalog-card .arrow-icon::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
+  transform: translate(-50%, -50%) rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.catalog-card h2,
+.catalog-card ul {
+  text-align: left;
+  line-height: 1.8;
+}
+
+.catalog-card ul li {
+  font-size: 16px;
+  color: #666;
+}
+
+.all-categories {
+  font-size: 16px;
+  color: #08a744;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Медіа-запити для адаптації */
+@media (max-width: 768px) {
+  .catalog-card img {
+    max-width: 120px;
+  }
+
+  .catalog-card h2 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalog-card img {
+    max-width: 100px;
+  }
+
+  .catalog-card h2 {
+    font-size: 16px;
+  }
 }
 
 .sto-container {
