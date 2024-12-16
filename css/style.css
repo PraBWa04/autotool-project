@@ -1546,10 +1546,10 @@ body {
 }
 
 .catalog-card img {
-  display: block; /* Забезпечує блоковий контекст для зображення */
-  margin: 0 auto; /* Центрує зображення горизонтально */
-  max-width: 100%; /* Забезпечує адаптивність зображення */
-  height: auto; /* Зберігає пропорції зображення */
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .catalog-card h2 {
