@@ -1623,6 +1623,78 @@ body {
   font-weight: bold;
 }
 
+.sto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sto-breadcrumbs {
+  font-size: 14px;
+  color: #888;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.sto-breadcrumbs a {
+  color: #666;
+  text-decoration: none;
+}
+
+.sto-breadcrumbs a:hover {
+  text-decoration: underline;
+  color: #08a744;
+}
+
+.sto-breadcrumbs span {
+  color: #333;
+}
+
+.sto-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.sto-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding-bottom: 70px;
+}
+
+.sto-category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: #333;
+}
+
+.sto-category-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.sto-category-card img {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.sto-category-card p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
 .about-us-intro {
   display: flex;
   align-items: stretch;
@@ -1808,78 +1880,6 @@ body {
   .catalog-card h2 {
     font-size: 16px;
   }
-}
-
-.sto-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.sto-breadcrumbs {
-  font-size: 14px;
-  color: #888;
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
-
-.sto-breadcrumbs a {
-  color: #666;
-  text-decoration: none;
-}
-
-.sto-breadcrumbs a:hover {
-  text-decoration: underline;
-  color: #08a744;
-}
-
-.sto-breadcrumbs span {
-  color: #333;
-}
-
-.sto-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 30px;
-}
-
-.sto-category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding-bottom: 70px;
-}
-
-.sto-category-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-decoration: none;
-  color: #333;
-}
-
-.sto-category-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-.sto-category-card img {
-  max-width: 150px;
-  height: auto;
-  margin-bottom: 15px;
-}
-
-.sto-category-card p {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
 }
 
 /* Телефони (до 480px) */
