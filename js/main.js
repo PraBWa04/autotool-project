@@ -321,3 +321,80 @@ document.addEventListener("DOMContentLoaded", () => {
   includeHTML("header", "partials/header.html");
   includeHTML("footer", "partials/footer.html");
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Динамічне підключення хедера
+  fetch("partials/header.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.querySelector("header").innerHTML = data;
+    })
+    .catch((error) => console.error("Помилка завантаження хедера:", error));
+
+  // Динамічне підключення футера
+  fetch("partials/footer.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.querySelector("footer").innerHTML = data;
+    })
+    .catch((error) => console.error("Помилка завантаження футера:", error));
+
+  // Підключення каталогу товарів з XML
+  const xmlPath = "data/products-feed.xml";
+
+  fetch(xmlPath)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then((xmlText) => {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+
+      // Перевірка на помилки парсингу
+      if (xmlDoc.querySelector("parsererror")) {
+        throw new Error("Помилка парсингу XML");
+      }
+
+      const products = xmlDoc.querySelectorAll("product");
+      const catalogContainer = document.getElementById("catalog");
+
+      if (catalogContainer && products.length === 0) {
+        catalogContainer.innerHTML = "<p>Товари не знайдено.</p>";
+        return;
+      }
+
+      // Генерація HTML для кожного товару
+      products.forEach((product) => {
+        const name = product.querySelector("name")?.textContent || "Без назви";
+        const price =
+          product.querySelector("price")?.textContent || "Ціна не вказана";
+        const currency =
+          product.querySelector("currency")?.textContent || "UAH";
+        const description =
+          product.querySelector("description")?.textContent || "Опис відсутній";
+        const image =
+          product.querySelector("image")?.textContent ||
+          "images/default-image.jpg";
+
+        const productHTML = `
+          <div class="product">
+            <img src="${image}" alt="${name}" class="product-image">
+            <h2>${name}</h2>
+            <p>${description}</p>
+            <p>Ціна: ${price} ${currency}</p>
+          </div>
+        `;
+        catalogContainer.innerHTML += productHTML;
+      });
+    })
+    .catch((error) => {
+      console.error("Помилка завантаження каталогу:", error);
+      const catalogContainer = document.getElementById("catalog");
+      if (catalogContainer) {
+        catalogContainer.innerHTML = `<p>Не вдалося завантажити каталог товарів. ${error.message}</p>`;
+      }
+    });
+});

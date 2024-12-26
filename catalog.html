@@ -3,101 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Каталог товарів</title>
+    <title>Категорії</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <header></header>
-    <main class="catalog-container">
-      <nav class="catalog-breadcrumbs">
-        <a href="index.html">Головна</a> &gt;
-        <span>Каталог товарів</span>
-      </nav>
-      <h1 class="catalog-title">Каталог товарів</h1>
-      <div class="catalog-grid">
-        <a href="auto-repair-equipment.html" class="catalog-card">
-          <img
-            src="images/Catalog/category-image.jpg"
-            alt="Обладнання для СТО"
-          />
-          <h2>Обладнання для СТО</h2>
-          <ul>
-            <li>Підйомне обладнання</li>
-            <li>Шиномонтажне обладнання</li>
-            <li>Діагностичне обладнання</li>
-            <li>Кліматичне обладнання та кліше</li>
-          </ul>
-          <p class="all-categories">
-            Усі категорії
-            <span class="arrow-icon"></span>
-          </p>
-        </a>
-        <a href="hand-tools.html" class="catalog-card">
-          <img
-            src="images/Catalog/category-image-1.jpg"
-            alt="Ручний інструмент та набори"
-          />
-          <h2>Ручний інструмент та набори</h2>
-          <ul>
-            <li>Набори інструментів</li>
-            <li>Біти та набори насадок</li>
-            <li>Головки торцеві</li>
-            <li>Тріскачки, воротки, подовжувачі</li>
-          </ul>
-          <p class="all-categories">
-            Усі категорії
-            <span class="arrow-icon"></span>
-          </p>
-        </a>
-        <a href="power-tools.html" class="catalog-card">
-          <img
-            src="images/Catalog/category-image-2.jpg"
-            alt="Акумуляторний інструмент"
-          />
-          <h2>Акумуляторний інструмент</h2>
-          <ul>
-            <li>Ручний інструмент</li>
-            <li>Набори акумуляторів</li>
-            <li>Обладнання</li>
-            <li>Акумулятори та зарядні пристрої до інструменту</li>
-          </ul>
-          <p class="all-categories">
-            Усі категорії
-            <span class="arrow-icon"></span>
-          </p>
-        </a>
-        <a href="electric-tools.html" class="catalog-card">
-          <img
-            src="images/Catalog/category-image-3.jpg"
-            alt="Електроінструмент"
-          />
-          <h2>Електроінструмент</h2>
-          <ul>
-            <li>Ручний електроінструмент</li>
-            <li>Шліфувальний та полірувальний інструмент</li>
-            <li>Вимірювальний інструмент</li>
-          </ul>
-          <p class="all-categories">
-            Усі категорії
-            <span class="arrow-icon"></span>
-          </p>
-        </a>
-        <a href="special-tools.html" class="catalog-card">
-          <img src="images/Catalog/category-image-4.jpg" alt="Інші товари" />
-          <h2>Інші товари</h2>
-          <ul>
-            <li>Запасні частини</li>
-            <li>Мастила та рідини</li>
-            <li>Додаткове обладнання</li>
-          </ul>
-          <p class="all-categories">
-            Усі категорії
-            <span class="arrow-icon"></span>
-          </p>
-        </a>
+    <main>
+      <h1>Категорії</h1>
+      <div class="container">
+        <!-- Фільтрація -->
+        <aside class="filters">
+          <h2>Фільтри</h2>
+          <label>
+            Мінімальна ціна:
+            <input type="number" id="min-price" placeholder="Від" />
+          </label>
+          <label>
+            Максимальна ціна:
+            <input type="number" id="max-price" placeholder="До" />
+          </label>
+          <button id="apply-filters">Застосувати</button>
+        </aside>
+
+        <!-- Каталог -->
+        <div id="catalog" class="catalog"></div>
       </div>
+
+      <!-- Пагінація -->
+      <div id="pagination"></div>
     </main>
     <footer></footer>
-    <script src="js/main.js"></script>
+    <script src="js/catalog.js"></script>
   </body>
 </html>
