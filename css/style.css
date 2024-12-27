@@ -2384,6 +2384,68 @@ body {
   }
 }
 
+/*catalog*/
+/* Фільтрація */
+.filters {
+  flex: 1;
+  max-width: 250px;
+}
+
+.filters label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.filters button {
+  background-color: #08a744;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background-color: #065d34;
+}
+
+/* Пагінація */
+.pagination {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-size: 35px;
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  background: #f9f9f9;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.pagination-button.active {
+  background: #08a744;
+  color: #fff;
+  border-color: #08a744;
+}
+
+.pagination-button:hover {
+  background: #ddd;
+}
+
+.pagination-ellipsis {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: default;
+  margin: 0 5px;
+}
+
 /* Адаптація бургер-меню */
 @media (max-width: 768px) {
   .burger-menu {

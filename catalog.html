@@ -3,34 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Категорії</title>
+    <title>Каталог</title>
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Локальні стилі для карток каталогу */
+
+      .product-card img {
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      .product-card h3 {
+        font-size: 14px;
+        color: #333;
+        margin: 0;
+        line-height: 1.4;
+        height: 40px;
+        overflow: hidden;
+      }
+
+      .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: auto;
+      }
+
+      .product-price {
+        font-size: 18px;
+        color: #141414;
+        font-weight: bold;
+      }
+
+      .add-to-favorites {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .add-to-favorites svg {
+        fill: none;
+        stroke: black;
+        stroke-width: 1.5;
+        transition: fill 0.3s ease;
+      }
+
+      .add-to-favorites:hover svg {
+        fill: #08a744;
+      }
+
+      /* Стиль для заголовка */
+      h1 {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <header></header>
     <main>
-      <h1>Категорії</h1>
+      <h1>Каталог</h1>
       <div class="container">
-        <!-- Фільтрація -->
-        <aside class="filters">
-          <h2>Фільтри</h2>
-          <label>
-            Мінімальна ціна:
-            <input type="number" id="min-price" placeholder="Від" />
-          </label>
-          <label>
-            Максимальна ціна:
-            <input type="number" id="max-price" placeholder="До" />
-          </label>
-          <button id="apply-filters">Застосувати</button>
-        </aside>
-
-        <!-- Каталог -->
-        <div id="catalog" class="catalog"></div>
+        <!-- Каталог товарів -->
+        <section class="catalog-section">
+          <div id="catalog-container" class="products">
+            <!-- Картки динамічно заповнюються через JavaScript -->
+          </div>
+          <!-- Пагінація -->
+          <div id="pagination" class="pagination"></div>
+        </section>
       </div>
-
-      <!-- Пагінація -->
-      <div id="pagination"></div>
     </main>
     <footer></footer>
     <script src="js/catalog.js"></script>
