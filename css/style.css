@@ -2387,34 +2387,121 @@ body {
 /*catalog*/
 /* Фільтрація */
 .filters {
-  flex: 1;
-  max-width: 250px;
+  position: sticky;
+  top: 20px;
+  max-width: 280px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.filters label {
-  display: block;
+.filters h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #08a744;
+}
+
+.filter-group {
+  margin-bottom: 25px;
+}
+
+.filter-group h3 {
+  font-size: 18px;
   margin-bottom: 10px;
+  color: #333;
 }
 
 .filters button {
-  background-color: #08a744;
+  background-color: #08a744; /* Same as in the design */
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 12px;
   border-radius: 5px;
-  cursor: pointer;
+  width: 100%; /* Make button full-width */
 }
 
 .filters button:hover {
   background-color: #065d34;
 }
 
+.range-slider {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.range-slider input[type="number"] {
+  width: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.filters select,
+.filters input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.apply-button,
+.reset-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #08a744;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.apply-button:hover,
+.reset-button:hover {
+  background-color: #065d34;
+}
+
+.reset-button {
+  background-color: #ff5555;
+}
+
+.reset-button:hover {
+  background-color: #d12a2a;
+}
+
+.selected-filters {
+  margin-bottom: 20px;
+}
+
+.selected-filters span {
+  display: inline-block;
+  background-color: #f5f5f5;
+  padding: 5px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  color: #666;
+}
+
+.filters .filter-group label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
 /* Пагінація */
 .pagination {
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  font-size: 35px;
+  margin-top: 20px;
 }
 
 .pagination-button {
@@ -2425,7 +2512,6 @@ body {
   border: 1px solid #ccc;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s, color 0.3s;
 }
 
 .pagination-button.active {

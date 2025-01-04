@@ -50,21 +50,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   // Фільтрація
-  document.getElementById("apply-filters").addEventListener("click", () => {
-    const minPrice =
-      parseFloat(document.getElementById("price-min").value) || 0;
-    const maxPrice =
-      parseFloat(document.getElementById("price-max").value) || Infinity;
+  document.getElementById("reset-filters").addEventListener("click", () => {
+    // Скидаємо всі фільтри
+    document
+      .querySelectorAll(".filters input")
+      .forEach((input) => (input.checked = false));
+    displayProducts(1, itemsPerPage, products);
+    setupPagination(products.length, itemsPerPage);
+  });
+
+  document.querySelectorAll(".filters input").forEach((input) => {
+    input.addEventListener("change", () => {
+      filterProducts();
+    });
+  });
+
+  function filterProducts() {
+    const selectedFilters = {
+      priceMin: parseFloat(document.getElementById("price-range").value) || 0,
+      priceMax: parseFloat(document.getElementById("price-range").max) || 10000,
+      brands: Array.from(
+        document.querySelectorAll(".filters input[type='checkbox']:checked")
+      ).map((input) => input.id),
+    };
 
     const filteredProducts = products.filter((product) => {
       const price =
         parseFloat(product.querySelector("price")?.textContent) || 0;
-      return price >= minPrice && price <= maxPrice;
+      const brand = product.querySelector("brand")?.textContent || "";
+
+      return (
+        price >= selectedFilters.priceMin &&
+        price <= selectedFilters.priceMax &&
+        selectedFilters.brands.includes(brand)
+      );
     });
 
     displayProducts(1, itemsPerPage, filteredProducts);
     setupPagination(filteredProducts.length, itemsPerPage);
-  });
+  }
 
   // Відображення товарів
   function displayProducts(page, itemsPerPage, items = products) {

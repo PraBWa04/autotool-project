@@ -69,16 +69,56 @@
     <main>
       <h1>Каталог</h1>
       <div class="container">
-        <!-- Каталог товарів -->
-        <section class="catalog-section">
-          <div id="catalog-container" class="products">
-            <!-- Картки динамічно заповнюються через JavaScript -->
+        <aside class="filters">
+          <h2>Фільтри</h2>
+        
+          <div class="filter-group">
+            <h3>Ціна</h3>
+            <label for="price-min">Мінімум:</label>
+            <input type="number" id="price-min" value="0" min="0" />
+            <label for="price-max">Максимум:</label>
+            <input type="number" id="price-max" value="10000" max="10000" />
+            <input type="range" id="price-range" min="0" max="10000" step="100" />
           </div>
-          <!-- Пагінація -->
+        
+          <div class="filter-group">
+            <h3>Бренд</h3>
+            <select id="brand-select">
+              <option value="">Всі бренди</option>
+              <option value="Toptul">Toptul</option>
+              <option value="Standard">Standard</option>
+            </select>
+          </div>
+        
+          <div class="filter-group">
+            <h3>Кількість одиниць</h3>
+            <select id="units-select">
+              <option value="">Всі</option>
+              <option value="24">24 шт.</option>
+              <option value="17">17 шт.</option>
+            </select>
+          </div>
+        
+          <div class="filter-group">
+            <h3>Комплектація</h3>
+            <select id="accessories-select" multiple>
+              <option value="Triskachka">Трискачка</option>
+              <option value="Svitkovaya">Свічкова голова</option>
+            </select>
+          </div>
+        
+          <button id="apply-filters" class="apply-button">Застосувати фільтри</button>
+          <button id="reset-filters" class="reset-button">Скинути фільтри</button>
+        </aside>
+        
+      
+        <section class="catalog-section">
+          <div id="catalog-container" class="products"></div>
           <div id="pagination" class="pagination"></div>
         </section>
       </div>
-    </main>
+      
+
     <footer></footer>
     <script src="js/catalog.js"></script>
   </body>
