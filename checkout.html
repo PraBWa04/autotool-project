@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Оформлення замовлення</title>
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">AUTO TOOL</div>
+          <div class="contact-info">
+            <img
+              src="images/Icons/phone.svg"
+              alt="Phone Icon"
+              class="phone-icon"
+            />
+            +38 (068) 790 08 30
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="checkout-page">
+      <div class="container">
+        <h1 class="page-title">Оформлення замовлення</h1>
+        <div class="checkout-container">
+          <!-- Contact details section -->
+          <section class="form-section">
+            <div class="step-header">
+              <div class="step-number">1</div>
+              <h2>Контактні дані</h2>
+            </div>
+            <form id="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="first-name">Ім'я *</label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    placeholder="Введіть Ваше ім'я"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="last-name">Прізвище *</label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    placeholder="Введіть Ваше прізвище"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Номер телефону *</label>
+                  <div class="phone-input-wrapper">
+                    <img
+                      src="https://via.placeholder.com/20"
+                      alt="Phone Icon"
+                      class="phone-icon"
+                    />
+                    <input
+                      type="tel"
+                      id="phone"
+                      placeholder="+38 (098) 888-88-88"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Електронна пошта *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Введіть Ваш email"
+                    required
+                  />
+                </div>
+              </div>
+              <button type="button" class="button continue-button">
+                Продовжити
+              </button>
+            </form>
+          </section>
+
+          <!-- Cart summary -->
+          <aside class="cart-summary">
+            <h2>3 товари у кошику</h2>
+            <div class="cart-item">
+              <img src="https://via.placeholder.com/80" alt="Перфоратор" />
+              <div class="item-info">
+                <p>Перфоратор мережевий SDS-Plus DeWALT D25133K</p>
+                <p class="item-sku">Артикул: D25133K</p>
+                <p class="item-price">7 699 ₴</p>
+                <div class="quantity-control">
+                  <button>-</button>
+                  <span>1</span>
+                  <button>+</button>
+                </div>
+              </div>
+            </div>
+            <div class="cart-total">
+              <span>До сплати:</span>
+              <span>65 749 ₴</span>
+            </div>
+            <button class="confirm-button">Підтвердити замовлення</button>
+            <p class="terms">
+              Натискаючи кнопку "Підтвердити замовлення", я погоджуюсь з умовами
+              користування.
+            </p>
+          </aside>
+        </div>
+
+        <!-- Steps: Доставка та Оплата -->
+        <section class="checkout-step">
+          <div class="step-header">
+            <div class="step-number">2</div>
+            <h2>Доставка</h2>
+          </div>
+        </section>
+        <section class="checkout-step">
+          <div class="step-header">
+            <div class="step-number">3</div>
+            <h2>Оплата</h2>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="checkout.js"></script>
+  </body>
+</html>
