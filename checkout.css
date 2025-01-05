@@ -1,0 +1,192 @@
+/* Основні стилі */
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.site-header {
+  background-color: #fff;
+  padding: 20px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: #666;
+}
+
+.phone-icon {
+  width: 24px;
+  margin-right: 10px;
+}
+
+.page-title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+.checkout-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.form-section,
+.cart-summary {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.form-section {
+  flex: 2;
+}
+
+.cart-summary {
+  flex: 1;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 18px;
+  color: #333;
+}
+
+.form-row {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.button,
+.confirm-button {
+  background-color: #08a744;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 40px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.continue-button {
+  width: fit-content;
+  margin-top: 20px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+}
+
+.item-info {
+  flex-grow: 1;
+}
+
+.item-sku {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.checkout-step {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.terms {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}
