@@ -216,6 +216,76 @@ input {
   border-radius: 12px;
 }
 
+/* "Delivery" section */
+.delivery-form {
+  padding: 30px 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.delivery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  transition: border-color 0.3s ease;
+}
+
+.radio-option:hover {
+  border-color: #08a744;
+}
+
+.radio-option img {
+  width: 32px;
+  height: 32px;
+}
+
+input[type="radio"] {
+  accent-color: #08a744;
+  width: 18px;
+  height: 18px;
+}
+
+button.delivery-continue {
+  background-color: #08a744;
+  color: white;
+  font-size: 20px;
+  padding: 14px 32px;
+  border-radius: 40px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button.delivery-continue:hover {
+  background-color: #06a03c;
+}
+
 @media (max-width: 768px) {
   .checkout-container {
     flex-direction: column;

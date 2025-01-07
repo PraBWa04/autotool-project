@@ -42,6 +42,7 @@
                   <input
                     type="text"
                     id="first-name"
+                    name="first-name"
                     placeholder="Введіть Ваше ім'я"
                     required
                   />
@@ -51,6 +52,7 @@
                   <input
                     type="text"
                     id="last-name"
+                    name="last-name"
                     placeholder="Введіть Ваше прізвище"
                     required
                   />
@@ -63,6 +65,7 @@
                     <input
                       type="tel"
                       id="phone"
+                      name="phone"
                       placeholder="+38 (098) 888-88-88"
                       required
                     />
@@ -73,6 +76,7 @@
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="Введіть Ваш email"
                     required
                   />
@@ -139,12 +143,52 @@
         </div>
 
         <!-- Steps: Доставка та Оплата -->
-        <section class="checkout-step">
+        <!-- Steps: Доставка -->
+        <section class="checkout-step delivery-step">
           <div class="step-header">
             <div class="step-number">2</div>
             <h2>Доставка</h2>
           </div>
+          <form id="delivery-form" class="delivery-form" style="display: none">
+            <div class="form-group">
+              <label for="city">Ваше місто *</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="Введіть назву міста..."
+                required
+              />
+            </div>
+            <h3>Спосіб доставки *</h3>
+            <div class="delivery-options">
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="delivery-method"
+                  value="Відділення Нова Пошта"
+                  required
+                />
+                <img src="images/Icons/nova-poshta.svg" alt="Нова Пошта" />
+                Відділення Нова Пошта
+              </label>
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="delivery-method"
+                  value="Кур’єр Нова Пошта"
+                  required
+                />
+                <img src="images/Icons/nova-poshta.svg" alt="Нова Пошта" />
+                Кур’єр Нова Пошта
+              </label>
+            </div>
+            <button type="button" class="button delivery-continue">
+              Продовжити
+            </button>
+          </form>
         </section>
+
         <section class="checkout-step">
           <div class="step-header">
             <div class="step-number">3</div>
