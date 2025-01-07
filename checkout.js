@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const apiKey = "API_KEY";
+  const apiKey = "a6e7f26727a0b152d96a7b9406519df9";
 
   const continueButton = document.querySelector(".continue-button");
   const form = document.getElementById("contact-form");
@@ -28,21 +28,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- Перехід до "Оплата" ---
-  continueButtonDelivery?.addEventListener("click", (event) => {
-    event.preventDefault();
-    const cityInput = deliveryForm.querySelector("#city")?.value.trim();
-    const selectedMethod = deliveryForm.querySelector(
-      "input[name='delivery-method']:checked"
-    );
+  document.addEventListener("DOMContentLoaded", () => {
+    const continueButtonDelivery = document.querySelector(".delivery-continue");
+    const paymentSection = document.querySelector(".payment-content");
 
-    if (cityInput && selectedMethod) {
-      paymentSection.style.opacity = "1";
-      paymentSection.style.pointerEvents = "auto";
-      paymentSection.style.display = "block";
-      paymentSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      alert("Будь ласка, оберіть місто та спосіб доставки!");
-    }
+    continueButtonDelivery?.addEventListener("click", (event) => {
+      event.preventDefault();
+      const cityInput = document.getElementById("city").value.trim();
+      const selectedMethod = document.querySelector(
+        "input[name='delivery-method']:checked"
+      );
+
+      if (cityInput && selectedMethod) {
+        paymentSection.classList.add("active");
+        paymentSection.style.display = "block";
+        paymentSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        alert("Будь ласка, оберіть місто та спосіб доставки!");
+      }
+    });
   });
 
   // --- Функція перевірки введених даних ---

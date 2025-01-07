@@ -292,6 +292,10 @@ button.delivery-continue:hover {
   transition: max-height 0.5s ease;
 }
 
+.payment-content {
+  display: none;
+}
+
 .payment-content.active {
   max-height: 500px;
 }
