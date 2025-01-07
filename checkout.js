@@ -3,7 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
   const deliveryForm = document.getElementById("delivery-form");
   const deliverySection = document.querySelector(".delivery-step");
+  const continueButtonDelivery = document.querySelector(".delivery-continue");
+  const paymentSection = document.querySelector(".checkout-step:last-of-type");
 
+  // Перехід до "Доставка"
   continueButton.addEventListener("click", (event) => {
     event.preventDefault();
 
@@ -16,12 +19,29 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isValidForm(firstName, lastName, phone, email)) {
       deliverySection.style.opacity = "1";
       deliverySection.style.pointerEvents = "auto";
-      deliverySection.querySelector("h2").style.color = "#333";
-      deliveryForm.style.display = "block";
-
+      deliveryForm.style.display = "block"; // Робимо блок доставки видимим
       deliverySection.scrollIntoView({ behavior: "smooth" });
     } else {
       alert("Будь ласка, заповніть усі поля коректно!");
+    }
+  });
+
+  // Перехід до "Оплата"
+  continueButtonDelivery?.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const cityInput = deliveryForm.querySelector("#city")?.value.trim();
+    const selectedMethod = deliveryForm.querySelector(
+      "input[name='delivery-method']:checked"
+    );
+
+    if (cityInput && selectedMethod) {
+      paymentSection.style.opacity = "1";
+      paymentSection.style.pointerEvents = "auto";
+      paymentSection.style.display = "block"; // Розкриваємо блок "Оплата"
+      paymentSection.scrollIntoView({ behavior: "smooth" }); // Прокручування до "Оплата"
+    } else {
+      alert("Будь ласка, оберіть місто та спосіб доставки!");
     }
   });
 
