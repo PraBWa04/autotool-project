@@ -398,3 +398,55 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Відстеження додавання до кошика
+  document.querySelectorAll(".add-to-cart").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const productCard = event.target.closest(".product-card");
+      const productName =
+        productCard.querySelector(".product-title")?.textContent.trim() ||
+        "Товар";
+      const productPrice =
+        parseFloat(productCard.querySelector(".product-price")?.textContent) ||
+        0;
+
+      fbq("track", "AddToCart", {
+        content_name: productName,
+        currency: "UAH",
+        value: productPrice,
+      });
+      console.log(`Event: AddToCart — ${productName}, ${productPrice} UAH`);
+    });
+  });
+
+  // Відстеження початку оформлення замовлення
+  document.querySelector(".checkout-button")?.addEventListener("click", () => {
+    fbq("track", "InitiateCheckout", {
+      currency: "UAH",
+      value: 0,
+    });
+    console.log("Event: InitiateCheckout");
+  });
+
+  // Відстеження додавання платіжної інформації
+  document.querySelectorAll('input[name="payment-method"]').forEach((input) => {
+    input.addEventListener("change", () => {
+      fbq("track", "AddPaymentInfo", {
+        currency: "UAH",
+        value: 0,
+      });
+      console.log("Event: AddPaymentInfo");
+    });
+  });
+
+  // Відстеження завершення покупки
+  document.querySelector(".confirm-button")?.addEventListener("click", () => {
+    fbq("track", "Purchase", {
+      content_name: "Завершено покупку",
+      currency: "UAH",
+      value: totalSum,
+    });
+    console.log("Event: Purchase");
+  });
+});
