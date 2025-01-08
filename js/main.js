@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => console.error("Помилка завантаження футера:", error));
 
   // Підключення каталогу товарів з XML
-  const xmlPath = "data/products-feed.xml";
+  const xmlPaths = ["data/products-feed.xml", "data/products_feed.xml"];
 
   fetch(xmlPath)
     .then((response) => {
