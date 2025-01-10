@@ -310,6 +310,11 @@ button.delivery-continue:hover {
   pointer-events: auto;
 }
 
+.payment-step.active .step-number,
+.payment-step.active h2 {
+  color: #000;
+}
+
 .checkout-step:not(.active) h2 {
   color: #b0b0b0;
 }

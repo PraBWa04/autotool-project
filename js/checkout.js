@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Поле для відділення ---
   const warehouseInputWrapper = document.createElement("div");
   warehouseInputWrapper.className = "form-group mt-2";
-  warehouseInputWrapper.style.display = "none"; // Спочатку приховано
+  warehouseInputWrapper.style.display = "none";
 
   const warehouseInput = document.createElement("input");
   warehouseInput.type = "text";
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Поля для кур'єрської доставки ---
   const courierFieldsWrapper = document.createElement("div");
   courierFieldsWrapper.className = "form-group mt-3";
-  courierFieldsWrapper.style.display = "none"; // Спочатку приховано
+  courierFieldsWrapper.style.display = "none";
 
   const streetInput = document.createElement("input");
   streetInput.type = "text";
@@ -110,16 +110,16 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener("input", () => {
       const feedback = input.nextElementSibling;
       if (feedback && feedback.classList.contains("invalid-feedback")) {
-        feedback.textContent = ""; // Очищуємо текст помилки
-        input.classList.remove("is-invalid"); // Забираємо червону рамку
+        feedback.textContent = "";
+        input.classList.remove("is-invalid");
       }
     });
   });
 
+  // --- Перехід до "Оплата" ---
   deliveryContinueButton.addEventListener("click", (event) => {
     event.preventDefault();
 
-    // Поля введення
     const cityInputField = document.getElementById("city");
     const selectedDeliveryMethod = document.querySelector(
       'input[name="delivery-method"]:checked'
@@ -140,38 +140,27 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    deliveryOptions.forEach((option) => {
-      option.addEventListener("change", () => {
-        const deliveryOptionLabels = document.querySelectorAll(
-          ".delivery-options label"
-        );
-        deliveryOptionLabels.forEach((label) =>
-          label.classList.remove("is-invalid")
-        );
-      });
-    });
-
-    if (selectedDeliveryMethod.value === "Відділення Нова Пошта") {
-      if (!warehouseInput.value.trim()) {
-        showFieldError(warehouseInput, "Введіть номер або назву відділення!");
-        return;
-      }
-    } else if (selectedDeliveryMethod.value === "Кур’єр Нова Пошта") {
-      if (!streetInput.value.trim()) {
-        showFieldError(streetInput, "Введіть вулицю!");
-        return;
-      }
-      if (!houseInput.value.trim()) {
-        showFieldError(houseInput, "Введіть номер будинку!");
-        return;
-      }
+    if (
+      selectedDeliveryMethod.value === "Відділення Нова Пошта" &&
+      !warehouseInput.value.trim()
+    ) {
+      showFieldError(warehouseInput, "Введіть номер або назву відділення!");
+      return;
     }
 
-    // Якщо всі поля заповнені — перехід на секцію "Оплата"
-    deliverySection.classList.remove("active");
+    if (
+      selectedDeliveryMethod.value === "Кур’єр Нова Пошта" &&
+      (!streetInput.value.trim() || !houseInput.value.trim())
+    ) {
+      showFieldError(streetInput, "Введіть адресу кур'єра!");
+      return;
+    }
+
+    // Зробити секцію "Оплата" видимою
     paymentSection.classList.add("active");
-    paymentSection.style.opacity = "1";
-    paymentSection.style.pointerEvents = "auto";
+    const paymentContent = paymentSection.querySelector(".payment-content");
+    paymentContent.style.display = "block";
+    paymentContent.style.maxHeight = "600px";
     paymentSection.scrollIntoView({ behavior: "smooth" });
   });
 
@@ -179,11 +168,11 @@ document.addEventListener("DOMContentLoaded", () => {
   deliveryOptions.forEach((option) => {
     option.addEventListener("change", () => {
       if (option.value === "Відділення Нова Пошта") {
-        warehouseInputWrapper.style.display = "block"; // Показуємо поле відділення
-        courierFieldsWrapper.style.display = "none"; // Ховаємо поля для кур'єра
+        warehouseInputWrapper.style.display = "block";
+        courierFieldsWrapper.style.display = "none";
       } else if (option.value === "Кур’єр Нова Пошта") {
-        warehouseInputWrapper.style.display = "none"; // Ховаємо поле відділення
-        courierFieldsWrapper.style.display = "block"; // Показуємо поля для кур'єра
+        warehouseInputWrapper.style.display = "none";
+        courierFieldsWrapper.style.display = "block";
       }
     });
   });
@@ -264,8 +253,8 @@ document.addEventListener("DOMContentLoaded", () => {
   cityInput.addEventListener("input", async function () {
     const query = this.value.trim();
     if (query.length >= 2) {
-      const cities = await getCities(query); // Запит міст
-      showAutocomplete(this, cities); // Відображення автопідказок
+      const cities = await getCities(query);
+      showAutocomplete(this, cities);
     }
   });
 
@@ -274,25 +263,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const city = cityInput.value.trim();
     const query = this.value.trim().toLowerCase();
     if (city.length > 0 && query.length >= 2) {
-      const warehouses = await getWarehousesByCity(city); // Запит відділень
+      const warehouses = await getWarehousesByCity(city);
       const matchingWarehouses = warehouses.filter((warehouse) =>
         warehouse.toLowerCase().includes(query)
       );
-      showAutocomplete(this, matchingWarehouses); // Відображення автопідказок
+      showAutocomplete(this, matchingWarehouses);
     }
   });
 
   // --- Функція показу автопідказок ---
   function showAutocomplete(inputElement, suggestions) {
-    removeExistingDropdown(); // Очистка старого списку автопідказок
+    removeExistingDropdown();
 
-    if (suggestions.length === 0) return; // Нічого не відображати, якщо немає збігів
+    if (suggestions.length === 0) return;
 
     const dropdown = document.createElement("ul");
     dropdown.className = "autocomplete-dropdown";
     dropdown.style.position = "absolute";
     dropdown.style.zIndex = "999";
-    dropdown.style.width = `${inputElement.offsetWidth}px`; // Розмір збігається із шириною input
+    dropdown.style.width = `${inputElement.offsetWidth}px`;
     dropdown.style.marginTop = "5px";
 
     // Додавання варіантів до списку
@@ -300,13 +289,13 @@ document.addEventListener("DOMContentLoaded", () => {
       .map((item) => `<li class="autocomplete-item">${item}</li>`)
       .join("");
 
-    inputElement.parentNode.appendChild(dropdown); // Додаємо список під input
+    inputElement.parentNode.appendChild(dropdown);
 
     // Подія вибору значення з автопідказки
     dropdown.addEventListener("click", (e) => {
       if (e.target.tagName === "LI") {
-        inputElement.value = e.target.textContent; // Заповнення значенням
-        removeExistingDropdown(); // Видалення списку після вибору
+        inputElement.value = e.target.textContent;
+        removeExistingDropdown();
       }
     });
   }
