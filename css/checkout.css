@@ -325,6 +325,7 @@ button.delivery-continue:hover {
   list-style: none;
   padding: 0;
   margin-top: 5px;
+  max-width: 100%;
 }
 
 .autocomplete-item {

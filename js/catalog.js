@@ -24,23 +24,39 @@ document.addEventListener("DOMContentLoaded", () => {
   includeHTML("header", "partials/header.html");
   includeHTML("footer", "partials/footer.html");
 
-  const xmlPath = "data/tg-tool.xml";
+  const xmlPath = ["data/tg-tool.xml", "data/products_feed.xml"];
   const catalogContainer = document.getElementById("catalog-container");
   const paginationContainer = document.getElementById("pagination");
+  const categoryContainer = document.getElementById("category-filters"); // Додайте div для категорій
   const itemsPerPage = 30;
   let currentPage = 1;
   let products = [];
+  let categories = []; // Збереження категорій
 
   // Завантаження XML
-  fetch(xmlPath)
-    .then((response) => response.text())
-    .then((xmlText) => {
+  Promise.all(xmlPath.map((path) => fetch(path).then((res) => res.text())))
+    .then((responses) => {
       const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, "application/xml");
-      if (xmlDoc.querySelector("parsererror")) {
-        throw new Error("Помилка парсингу XML");
-      }
-      products = Array.from(xmlDoc.querySelectorAll("offer"));
+      responses.forEach((xmlText) => {
+        const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+        if (xmlDoc.querySelector("parsererror")) {
+          console.error(
+            "Помилка парсингу XML:",
+            xmlDoc.querySelector("parsererror").textContent
+          );
+        } else {
+          const offers = Array.from(xmlDoc.querySelectorAll("offer"));
+          offers.forEach((offer) => {
+            const category =
+              offer.querySelector("category")?.textContent || "Інше";
+            if (!categories.includes(category)) {
+              categories.push(category);
+            }
+          });
+          products.push(...offers); // Додаємо всі товари з XML
+        }
+      });
+      displayCategories(categories); // Показуємо категорії
       displayProducts(currentPage, itemsPerPage);
       setupPagination(products.length, itemsPerPage);
     })
@@ -49,22 +65,41 @@ document.addEventListener("DOMContentLoaded", () => {
       catalogContainer.innerHTML = `<p>Не вдалося завантажити каталог товарів.</p>`;
     });
 
-  // Фільтрація
-  document.getElementById("reset-filters").addEventListener("click", () => {
-    // Скидаємо всі фільтри
-    document
-      .querySelectorAll(".filters input")
-      .forEach((input) => (input.checked = false));
-    displayProducts(1, itemsPerPage, products);
-    setupPagination(products.length, itemsPerPage);
-  });
-
-  document.querySelectorAll(".filters input").forEach((input) => {
-    input.addEventListener("change", () => {
-      filterProducts();
+  // Відображення категорій
+  function displayCategories(categories) {
+    categories.forEach((category) => {
+      const categoryButton = document.createElement("button");
+      categoryButton.textContent = category;
+      categoryButton.classList.add("category-button");
+      categoryButton.addEventListener("click", () => {
+        filterByCategory(category);
+      });
+      categoryContainer.appendChild(categoryButton);
     });
-  });
 
+    // Додаємо кнопку для "Всі товари"
+    const allButton = document.createElement("button");
+    allButton.textContent = "Всі товари";
+    allButton.classList.add("category-button");
+    allButton.addEventListener("click", () => {
+      displayProducts(1, itemsPerPage, products);
+      setupPagination(products.length, itemsPerPage);
+    });
+    categoryContainer.appendChild(allButton);
+  }
+
+  // Фільтрація за категорією
+  function filterByCategory(category) {
+    const filteredProducts = products.filter((product) => {
+      const productCategory =
+        product.querySelector("category")?.textContent || "Інше";
+      return productCategory === category;
+    });
+    displayProducts(1, itemsPerPage, filteredProducts);
+    setupPagination(filteredProducts.length, itemsPerPage);
+  }
+
+  // Фільтрація за ціною та брендами
   function filterProducts() {
     const selectedFilters = {
       priceMin: parseFloat(document.getElementById("price-range").value) || 0,
@@ -78,11 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const price =
         parseFloat(product.querySelector("price")?.textContent) || 0;
       const brand = product.querySelector("brand")?.textContent || "";
+      const category = product.querySelector("category")?.textContent || "Інше";
 
       return (
         price >= selectedFilters.priceMin &&
         price <= selectedFilters.priceMax &&
-        selectedFilters.brands.includes(brand)
+        (selectedFilters.brands.length === 0 ||
+          selectedFilters.brands.includes(brand))
       );
     });
 
@@ -95,6 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
     catalogContainer.innerHTML = "";
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
+
+    if (items.length === 0) {
+      catalogContainer.innerHTML = `<p>Товари не знайдені за обраними фільтрами.</p>`;
+      return;
+    }
 
     items.slice(start, end).forEach((item) => {
       const name = item.querySelector("name_ua")?.textContent || "Без назви";
