@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
   const deliveryForm = document.getElementById("delivery-form");
   const deliverySection = document.querySelector(".delivery-step");
+  const paymentSection = document.querySelector(".payment-step");
 
   // --- Поле для відділення ---
   const warehouseInputWrapper = document.createElement("div");
@@ -86,18 +87,104 @@ document.addEventListener("DOMContentLoaded", () => {
       deliveryForm.style.display = "block";
       deliverySection.scrollIntoView({ behavior: "smooth" });
     }
+  });
 
-    // --- Логіка для вибору способу доставки ---
+  function showFieldError(inputElement, message) {
+    let errorElement = inputElement.nextElementSibling;
+    if (!errorElement || !errorElement.classList.contains("invalid-feedback")) {
+      errorElement = document.createElement("div");
+      errorElement.className = "invalid-feedback";
+      inputElement.parentNode.appendChild(errorElement);
+    }
+    inputElement.classList.add("is-invalid");
+    errorElement.textContent = message;
+  }
+
+  // --- Перехід до "Оплата" ---
+  const deliveryContinueButton = document.querySelector(".delivery-continue");
+  const deliveryInputs = document.querySelectorAll(
+    "#city, input[name='delivery-method'], input[placeholder='Вулиця'], input[placeholder='Будинок'], input[placeholder='Квартира'], input[placeholder*='відділення']"
+  );
+
+  deliveryInputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      const feedback = input.nextElementSibling;
+      if (feedback && feedback.classList.contains("invalid-feedback")) {
+        feedback.textContent = ""; // Очищуємо текст помилки
+        input.classList.remove("is-invalid"); // Забираємо червону рамку
+      }
+    });
+  });
+
+  deliveryContinueButton.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    // Поля введення
+    const cityInputField = document.getElementById("city");
+    const selectedDeliveryMethod = document.querySelector(
+      'input[name="delivery-method"]:checked'
+    );
+
+    if (!cityInputField.value.trim()) {
+      showFieldError(cityInputField, "Будь ласка, введіть назву міста!");
+      return;
+    }
+
+    if (!selectedDeliveryMethod) {
+      const deliveryOptionLabels = document.querySelectorAll(
+        ".delivery-options label"
+      );
+      deliveryOptionLabels.forEach((label) =>
+        label.classList.add("is-invalid")
+      );
+      return;
+    }
+
     deliveryOptions.forEach((option) => {
       option.addEventListener("change", () => {
-        if (option.value === "Відділення Нова Пошта") {
-          warehouseInputWrapper.style.display = "block"; // Показуємо поле відділення
-          courierFieldsWrapper.style.display = "none"; // Ховаємо поля для кур'єра
-        } else if (option.value === "Кур’єр Нова Пошта") {
-          warehouseInputWrapper.style.display = "none"; // Ховаємо поле відділення
-          courierFieldsWrapper.style.display = "block"; // Показуємо поля для кур'єра
-        }
+        const deliveryOptionLabels = document.querySelectorAll(
+          ".delivery-options label"
+        );
+        deliveryOptionLabels.forEach((label) =>
+          label.classList.remove("is-invalid")
+        );
       });
+    });
+
+    if (selectedDeliveryMethod.value === "Відділення Нова Пошта") {
+      if (!warehouseInput.value.trim()) {
+        showFieldError(warehouseInput, "Введіть номер або назву відділення!");
+        return;
+      }
+    } else if (selectedDeliveryMethod.value === "Кур’єр Нова Пошта") {
+      if (!streetInput.value.trim()) {
+        showFieldError(streetInput, "Введіть вулицю!");
+        return;
+      }
+      if (!houseInput.value.trim()) {
+        showFieldError(houseInput, "Введіть номер будинку!");
+        return;
+      }
+    }
+
+    // Якщо всі поля заповнені — перехід на секцію "Оплата"
+    deliverySection.classList.remove("active");
+    paymentSection.classList.add("active");
+    paymentSection.style.opacity = "1";
+    paymentSection.style.pointerEvents = "auto";
+    paymentSection.scrollIntoView({ behavior: "smooth" });
+  });
+
+  // --- Логіка для вибору способу доставки ---
+  deliveryOptions.forEach((option) => {
+    option.addEventListener("change", () => {
+      if (option.value === "Відділення Нова Пошта") {
+        warehouseInputWrapper.style.display = "block"; // Показуємо поле відділення
+        courierFieldsWrapper.style.display = "none"; // Ховаємо поля для кур'єра
+      } else if (option.value === "Кур’єр Нова Пошта") {
+        warehouseInputWrapper.style.display = "none"; // Ховаємо поле відділення
+        courierFieldsWrapper.style.display = "block"; // Показуємо поля для кур'єра
+      }
     });
   });
 
