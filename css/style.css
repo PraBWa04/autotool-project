@@ -1176,13 +1176,13 @@ main h1 {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center; /* Центрування тексту */
+  text-align: center;
 }
 
 .brand-card img {
-  max-width: 80%; /* Щоб логотипи не виходили за межі картки */
+  max-width: 80%;
   height: auto;
-  margin-bottom: 10px; /* Відступ між зображенням і текстом */
+  margin-bottom: 10px;
 }
 
 .brand-card:hover {
@@ -2397,7 +2397,7 @@ body.catalog-page h1 {
 
 body.catalog-page .filters {
   position: sticky;
-  top: 20px; /* Щоб фільтри залишались видимими при скролі */
+  top: 20px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
