@@ -340,34 +340,41 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => console.error("Помилка завантаження футера:", error));
 
   // Підключення каталогу товарів з XML
-  const xmlPath = ["data/tg-tool.xml", "data/products_feed.xml"];
-
-  fetch(xmlPath)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text();
-    })
-    .then((xmlText) => {
+  Promise.all([
+    fetch("data/tg-tool.xml").then((res) => res.text()),
+    fetch("data/products_feed.xml").then((res) => res.text()),
+  ])
+    .then(([xmlText1, xmlText2]) => {
       const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+      const xmlDoc1 = parser.parseFromString(xmlText1, "application/xml");
+      const xmlDoc2 = parser.parseFromString(xmlText2, "application/xml");
 
       // Перевірка на помилки парсингу
-      if (xmlDoc.querySelector("parsererror")) {
-        throw new Error("Помилка парсингу XML");
+      if (
+        xmlDoc1.querySelector("parsererror") ||
+        xmlDoc2.querySelector("parsererror")
+      ) {
+        throw new Error("Помилка парсингу одного з XML файлів");
       }
 
-      const products = xmlDoc.querySelectorAll("product");
+      // Об'єднуємо всі категорії та продукти
+      const combinedCategories = [
+        ...xmlDoc1.querySelectorAll("category"),
+        ...xmlDoc2.querySelectorAll("category"),
+      ];
+      const combinedProducts = [
+        ...xmlDoc1.querySelectorAll("product"),
+        ...xmlDoc2.querySelectorAll("product"),
+      ];
+
       const catalogContainer = document.getElementById("catalog");
 
-      if (catalogContainer && products.length === 0) {
+      if (catalogContainer && combinedProducts.length === 0) {
         catalogContainer.innerHTML = "<p>Товари не знайдено.</p>";
         return;
       }
 
-      // Генерація HTML для кожного товару
-      products.forEach((product) => {
+      combinedProducts.forEach((product) => {
         const name = product.querySelector("name")?.textContent || "Без назви";
         const price =
           product.querySelector("price")?.textContent || "Ціна не вказана";
