@@ -2517,6 +2517,47 @@ body.catalog-page .pagination-ellipsis {
   flex: 1;
 }
 
+/*favorites*/
+.favorite-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.favorite-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+}
+
+.favorite-item .details {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.favorite-item h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.favorite-item .remove-btn {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.favorite-item .remove-btn:hover {
+  background-color: #ff0000;
+}
+
 /* Адаптація бургер-меню */
 @media (max-width: 768px) {
   .burger-menu {

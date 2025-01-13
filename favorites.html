@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Улюблені товари</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <!-- Підключення загального header -->
+      <div id="header-placeholder"></div>
+      <script>
+        fetch("header.html")
+          .then((response) => response.text())
+          .then(
+            (data) =>
+              (document.getElementById("header-placeholder").innerHTML = data)
+          );
+      </script>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <h1>Улюблені товари</h1>
+      <div class="favorites-list">
+        <!-- Список улюблених товарів динамічно -->
+        <p id="no-favorites-message">Ви ще не додали товари в улюблене.</p>
+        <div id="favorites-container"></div>
+      </div>
+    </main>
+
+    <footer></footer>
+    <script src="js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const favoritesContainer = document.getElementById(
+          "favorites-container"
+        );
+        const noFavoritesMessage = document.getElementById(
+          "no-favorites-message"
+        );
+
+        const favoriteItems =
+          JSON.parse(localStorage.getItem("favorites")) || [];
+
+        if (favoriteItems.length === 0) {
+          noFavoritesMessage.style.display = "block";
+        } else {
+          noFavoritesMessage.style.display = "none";
+          favoriteItems.forEach((item) => {
+            const itemHTML = `
+                <div class="favorite-item">
+                  <img src="${item.image}" alt="${item.name}" class="product-image">
+                  <div class="details">
+                    <h3>${item.name}</h3>
+                    <p>${item.price}</p>
+                  </div>
+                  <button class="remove-btn">Видалити</button>
+                </div>`;
+            favoritesContainer.innerHTML += itemHTML;
+          });
+        }
+
+        // Видалення товару з улюбленого
+        favoritesContainer.addEventListener("click", (e) => {
+          if (e.target.classList.contains("remove-btn")) {
+            const productName =
+              e.target.previousElementSibling.querySelector("h3").textContent;
+            const updatedFavorites = favoriteItems.filter(
+              (item) => item.name !== productName
+            );
+            localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+            location.reload(); // Оновлення сторінки після видалення
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -457,3 +457,48 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Event: Purchase");
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const favoriteButtons = document.querySelectorAll(".add-to-favorites");
+  const favoriteCounter = document.querySelector(".favorite .counter");
+
+  // Завантаження існуючих улюблених товарів
+  let favoriteItems = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  const updateCounter = () => {
+    favoriteCounter.textContent = favoriteItems.length;
+  };
+
+  // Оновлення лічильника
+  updateCounter();
+
+  favoriteButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const productCard = e.target.closest(".product-card");
+      const productName = productCard.querySelector("h3").textContent;
+      const productPrice = productCard.querySelector("p").textContent;
+      const productImage = productCard.querySelector("img").src;
+
+      const productData = {
+        name: productName,
+        price: productPrice,
+        image: productImage,
+      };
+
+      // Додавання або видалення з улюбленого
+      const index = favoriteItems.findIndex(
+        (item) => item.name === productName
+      );
+      if (index > -1) {
+        favoriteItems.splice(index, 1);
+        alert("Товар видалено з улюбленого!");
+      } else {
+        favoriteItems.push(productData);
+        alert("Товар додано до улюбленого!");
+      }
+
+      localStorage.setItem("favorites", JSON.stringify(favoriteItems));
+      updateCounter();
+    });
+  });
+});
