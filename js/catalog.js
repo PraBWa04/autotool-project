@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Обробка додавання до кошика
       cartButton.addEventListener("click", () => {
         addToCart(name, price);
-        alert(`Товар "${name}" додано до кошика за ціною ${price} грн`);
+        showToast(`Товар "${name}" додано до кошика за ціною ${price} грн ✅`);
       });
     });
   }
@@ -279,6 +279,22 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateCounters() {
     cartCounter.textContent = cartCount > 0 ? cartCount : "0";
     favoriteCounter.textContent = favoriteCount > 0 ? favoriteCount : "0";
+  }
+
+  // Функція для показу спливаючого повідомлення
+  function showToast(message) {
+    const toast = document.getElementById("toast-notification");
+    toast.textContent = message; // Додаємо текст повідомлення
+    toast.classList.remove("hidden");
+    toast.classList.add("show");
+
+    // Приховуємо повідомлення через 3 секунди
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 500); // Час для завершення анімації
+    }, 3000); // Час відображення
   }
 
   // Відстеження подій для улюблених товарів і кошика
