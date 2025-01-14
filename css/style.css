@@ -1851,13 +1851,13 @@ body {
 
 /* Стилі для секції автосервісу */
 .service-highlight {
-  background-color: #f9f9f9; /* Загальний фон */
+  background-color: #f9f9f9;
   padding: 60px 15px;
 }
 
 .highlight-wrapper {
   display: flex;
-  align-items: stretch; /* Вирівнювання блоків по висоті */
+  align-items: stretch;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
@@ -2556,6 +2556,17 @@ body.catalog-page .pagination-ellipsis {
 
 .favorite-item .remove-btn:hover {
   background-color: #ff0000;
+}
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
 }
 
 /* Адаптація бургер-меню */
