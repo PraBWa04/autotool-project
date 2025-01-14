@@ -1,3 +1,5 @@
+import { addToCart, toggleFavorite } from "./utils.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   // Функція для підключення зовнішніх HTML частин (header та footer)
   const includeHTML = async (selector, url) => {
@@ -27,11 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const xmlPath = ["data/tg-tool.xml", "data/products_feed.xml"];
   const catalogContainer = document.getElementById("catalog-container");
   const paginationContainer = document.getElementById("pagination");
-  const categoryContainer = document.getElementById("category-filters"); // Додайте div для категорій
+  const categoryContainer = document.getElementById("category-filters");
   const itemsPerPage = 30;
   let currentPage = 1;
   let products = [];
-  let categories = []; // Збереження категорій
+  let categories = [];
 
   // Завантаження XML
   Promise.all(xmlPath.map((path) => fetch(path).then((res) => res.text())))
@@ -53,10 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
               categories.push(category);
             }
           });
-          products.push(...offers); // Додаємо всі товари з XML
+          products.push(...offers);
         }
       });
-      displayCategories(categories); // Показуємо категорії
+      displayCategories(categories);
       displayProducts(currentPage, itemsPerPage);
       setupPagination(products.length, itemsPerPage);
     })
@@ -99,34 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setupPagination(filteredProducts.length, itemsPerPage);
   }
 
-  // Фільтрація за ціною та брендами
-  function filterProducts() {
-    const selectedFilters = {
-      priceMin: parseFloat(document.getElementById("price-range").value) || 0,
-      priceMax: parseFloat(document.getElementById("price-range").max) || 10000,
-      brands: Array.from(
-        document.querySelectorAll(".filters input[type='checkbox']:checked")
-      ).map((input) => input.id),
-    };
-
-    const filteredProducts = products.filter((product) => {
-      const price =
-        parseFloat(product.querySelector("price")?.textContent) || 0;
-      const brand = product.querySelector("brand")?.textContent || "";
-      const category = product.querySelector("category")?.textContent || "Інше";
-
-      return (
-        price >= selectedFilters.priceMin &&
-        price <= selectedFilters.priceMax &&
-        (selectedFilters.brands.length === 0 ||
-          selectedFilters.brands.includes(brand))
-      );
-    });
-
-    displayProducts(1, itemsPerPage, filteredProducts);
-    setupPagination(filteredProducts.length, itemsPerPage);
-  }
-
   // Відображення товарів
   function displayProducts(page, itemsPerPage, items = products) {
     catalogContainer.innerHTML = "";
@@ -146,37 +120,61 @@ document.addEventListener("DOMContentLoaded", () => {
         item.querySelector("picture")?.textContent ||
         "images/default-image.jpg";
 
-      catalogContainer.innerHTML += `
-        <div class="product-card">
-          <button class="add-to-favorites">
-            <svg
-              class="favorite-svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="white"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                stroke="black"
-                stroke-width="1.5"
-              />
-            </svg>
+      const productCard = document.createElement("div");
+      productCard.classList.add("product-card", "best-offers-card");
+
+      productCard.innerHTML = `
+        <button class="add-to-favorites">
+          <svg
+            class="favorite-svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="white"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              stroke="black"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+        <img src="${image}" alt="${name}" class="product-image" />
+        <h3 class="product-title">${name}</h3>
+        <div class="product-footer">
+          <p class="product-price">${price} грн</p>
+          <button class="add-to-cart">
+            <span>В кошик</span>
+            <img src="images/Icons/cart-white.svg" alt="Кошик" class="cart-icon" />
           </button>
-          <img src="${image}" alt="${name}" class="product-image" />
-          <h3 class="product-title">${name}</h3>
-          <div class="product-footer">
-            <span class="product-price">${price} грн</span>
-            <button class="add-to-cart">
-              <img
-                src="images/Icons/cart-white.svg"
-                alt="Кошик"
-                class="cart-icon"
-              />
-            </button>
-          </div>
-        </div>`;
+        </div>
+      `;
+
+      catalogContainer.appendChild(productCard);
+
+      const favoriteButton = productCard.querySelector(".add-to-favorites");
+      const cartButton = productCard.querySelector(".add-to-cart");
+
+      // Обробка додавання до улюбленого
+      favoriteButton.addEventListener("click", () => {
+        const productData = {
+          name,
+          price,
+          image,
+        };
+        const isFavorite = toggleFavorite(productData);
+
+        const path = favoriteButton.querySelector("path");
+        path.setAttribute("fill", isFavorite ? "#08a744" : "white");
+        path.setAttribute("stroke", isFavorite ? "#08a744" : "black");
+      });
+
+      // Обробка додавання до кошика
+      cartButton.addEventListener("click", () => {
+        addToCart(name, price);
+        alert(`Товар "${name}" додано до кошика за ціною ${price} грн`);
+      });
     });
   }
 
@@ -184,9 +182,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function setupPagination(totalItems, itemsPerPage) {
     paginationContainer.innerHTML = "";
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const maxButtons = 5; // Максимальна кількість кнопок для відображення
+    const maxButtons = 5;
 
-    // Додаємо кнопку "Попередня"
     if (currentPage > 1) {
       const prevButton = document.createElement("button");
       prevButton.textContent = "Попередня";
@@ -199,14 +196,13 @@ document.addEventListener("DOMContentLoaded", () => {
       paginationContainer.appendChild(prevButton);
     }
 
-    // Визначаємо, які кнопки відображати
+    // Додаємо кнопки сторінок пагінації
     let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
     let endPage = Math.min(
       totalPages,
       currentPage + Math.floor(maxButtons / 2)
     );
 
-    // Додаємо кнопку "1", якщо вона не в діапазоні
     if (startPage > 1) {
       const firstButton = document.createElement("button");
       firstButton.textContent = "1";
@@ -218,7 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       paginationContainer.appendChild(firstButton);
 
-      // Додаємо еліпс, якщо необхідно
       if (startPage > 2) {
         const ellipsisStart = document.createElement("span");
         ellipsisStart.textContent = "...";
@@ -227,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Додаємо основні кнопки пагінації
     for (let i = startPage; i <= endPage; i++) {
       const button = document.createElement("button");
       button.textContent = i;
@@ -243,9 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
       paginationContainer.appendChild(button);
     }
 
-    // Додаємо кнопку "211", якщо вона не в діапазоні
     if (endPage < totalPages) {
-      // Додаємо еліпс перед останньою сторінкою, якщо необхідно
       if (endPage < totalPages - 1) {
         const ellipsisEnd = document.createElement("span");
         ellipsisEnd.textContent = "...";
@@ -264,7 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
       paginationContainer.appendChild(lastButton);
     }
 
-    // Додаємо кнопку "Наступна"
     if (currentPage < totalPages) {
       const nextButton = document.createElement("button");
       nextButton.textContent = "Наступна";
@@ -277,4 +268,85 @@ document.addEventListener("DOMContentLoaded", () => {
       paginationContainer.appendChild(nextButton);
     }
   }
+
+  // Лічильники для кошика та улюбленого
+  const cartCounter = document.querySelector(".cart .counter");
+  const favoriteCounter = document.querySelector(".favorite .counter");
+  let cartCount = 0;
+  let favoriteCount = 0;
+
+  // Оновлення лічильників
+  function updateCounters() {
+    cartCounter.textContent = cartCount > 0 ? cartCount : "0";
+    favoriteCounter.textContent = favoriteCount > 0 ? favoriteCount : "0";
+  }
+
+  // Відстеження подій для улюблених товарів і кошика
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".add-to-favorites")) {
+      const productCard = event.target.closest(".product-card");
+      const productName = productCard
+        .querySelector(".product-title")
+        .textContent.trim();
+      const path = event.target.closest("svg").querySelector("path");
+      const isFavorite = path.getAttribute("fill") === "#08a744";
+
+      if (isFavorite) {
+        path.setAttribute("fill", "white");
+        favoriteCount = Math.max(0, favoriteCount - 1);
+      } else {
+        path.setAttribute("fill", "#08a744");
+        favoriteCount++;
+      }
+
+      updateCounters();
+    }
+
+    if (event.target.closest(".add-to-cart")) {
+      cartCount++;
+      updateCounters();
+      alert("Товар додано до кошика!");
+    }
+  });
+
+  // Фільтрація за ціною та брендами
+  function filterProducts() {
+    const selectedFilters = {
+      priceMin: parseFloat(document.getElementById("price-range").value) || 0,
+      priceMax: parseFloat(document.getElementById("price-range").max) || 10000,
+      brands: Array.from(
+        document.querySelectorAll(".filters input[type='checkbox']:checked")
+      ).map((input) => input.id),
+    };
+
+    const filteredProducts = products.filter((product) => {
+      const price =
+        parseFloat(product.querySelector("price")?.textContent) || 0;
+      const brand = product.querySelector("brand")?.textContent || "";
+
+      return (
+        price >= selectedFilters.priceMin &&
+        price <= selectedFilters.priceMax &&
+        (selectedFilters.brands.length === 0 ||
+          selectedFilters.brands.includes(brand))
+      );
+    });
+
+    displayProducts(1, itemsPerPage, filteredProducts);
+    setupPagination(filteredProducts.length, itemsPerPage);
+  }
+
+  // Пошук товарів за назвою
+  const searchInput = document.getElementById("search-input");
+  searchInput?.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredProducts = products.filter((product) => {
+      const productName =
+        product.querySelector("name_ua")?.textContent.toLowerCase() || "";
+      return productName.includes(searchTerm);
+    });
+
+    displayProducts(1, itemsPerPage, filteredProducts);
+    setupPagination(filteredProducts.length, itemsPerPage);
+  });
 });
