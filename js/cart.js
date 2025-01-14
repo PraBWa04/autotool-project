@@ -1,8 +1,32 @@
+import { loadCart } from "./utils.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const removeButtons = document.querySelectorAll(".remove-button");
+  const cartItemsContainer = document.getElementById("cart-items-container");
   const totalItemsElement = document.getElementById("total-items");
   const totalPriceElement = document.getElementById("total-price");
 
+  // Завантажуємо товари з localStorage
+  const { items, totalPrice } = loadCart();
+
+  if (items.length > 0) {
+    items.forEach((item) => {
+      const cartItem = document.createElement("div");
+      cartItem.className = "cart-item";
+      cartItem.innerHTML = `
+        <p class="product-title">${item.name}</p>
+        <p class="product-price">₴${item.price}</p>
+        <button class="remove-button">Видалити</button>
+      `;
+      cartItemsContainer.appendChild(cartItem);
+    });
+  } else {
+    cartItemsContainer.innerHTML = "<p>Кошик порожній</p>";
+  }
+
+  totalPriceElement.textContent = `₴${totalPrice}`;
+
+  // Обробка кнопок "Видалити"
+  const removeButtons = document.querySelectorAll(".remove-button");
   removeButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       const cartItem = e.target.closest(".cart-item");
