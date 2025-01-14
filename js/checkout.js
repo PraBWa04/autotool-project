@@ -90,14 +90,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function showFieldError(inputElement, message) {
-    let errorElement = inputElement.nextElementSibling;
-    if (!errorElement || !errorElement.classList.contains("invalid-feedback")) {
+    let errorElement =
+      inputElement.parentNode.querySelector(".invalid-feedback");
+    if (!errorElement) {
       errorElement = document.createElement("div");
       errorElement.className = "invalid-feedback";
       inputElement.parentNode.appendChild(errorElement);
     }
-    inputElement.classList.add("is-invalid");
-    errorElement.textContent = message;
+    inputElement.classList.add("is-invalid"); // Додаємо червону рамку
+    errorElement.textContent = message; // Відображаємо повідомлення про помилку
+
+    // Додаємо обробник події для очищення помилки при введенні коректних даних
+    inputElement.addEventListener("input", () => {
+      inputElement.classList.remove("is-invalid");
+      errorElement.textContent = "";
+    });
   }
 
   // --- Перехід до "Оплата" ---
@@ -106,15 +113,18 @@ document.addEventListener("DOMContentLoaded", () => {
     "#city, input[name='delivery-method'], input[placeholder='Вулиця'], input[placeholder='Будинок'], input[placeholder='Квартира'], input[placeholder*='відділення']"
   );
 
-  deliveryInputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      const feedback = input.nextElementSibling;
+  function clearErrorOnInput(inputElement) {
+    inputElement.addEventListener("input", () => {
+      const feedback = inputElement.nextElementSibling;
       if (feedback && feedback.classList.contains("invalid-feedback")) {
         feedback.textContent = "";
-        input.classList.remove("is-invalid");
+        inputElement.classList.remove("is-invalid");
       }
     });
-  });
+  }
+
+  // Очищуємо всі поля при введенні
+  deliveryInputs.forEach(clearErrorOnInput);
 
   // --- Перехід до "Оплата" ---
   deliveryContinueButton.addEventListener("click", (event) => {
@@ -131,11 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!selectedDeliveryMethod) {
-      const deliveryOptionLabels = document.querySelectorAll(
-        ".delivery-options label"
-      );
-      deliveryOptionLabels.forEach((label) =>
-        label.classList.add("is-invalid")
+      showFieldError(
+        document.querySelector(".delivery-options"),
+        "Оберіть спосіб доставки!"
       );
       return;
     }
@@ -148,12 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (
-      selectedDeliveryMethod.value === "Кур’єр Нова Пошта" &&
-      (!streetInput.value.trim() || !houseInput.value.trim())
-    ) {
-      showFieldError(streetInput, "Введіть адресу кур'єра!");
-      return;
+    if (selectedDeliveryMethod.value === "Кур’єр Нова Пошта") {
+      if (!streetInput.value.trim()) {
+        showFieldError(streetInput, "Введіть вулицю!");
+        return;
+      }
+      if (!houseInput.value.trim()) {
+        showFieldError(houseInput, "Введіть номер будинку!");
+        return;
+      }
     }
 
     // Зробити секцію "Оплата" видимою
